@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔔 Bildirimler</title>
+    <link rel="stylesheet" href="/static/styles.css"> <!-- CSS Bağlantısı -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+        }
+        .notification-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .notification {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background: #e3f2fd;
+        }
+        .unread {
+            background: #ffeb3b;
+        }
+        .back-button {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .back-button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h2>🔔 Bildirimler</h2>
+    <div class="notification-container">
+        {% for notification in notifications %}
+        <div class="notification {% if not notification.is_read %}unread{% endif %}">
+            <h3>{{ notification.title }}</h3>
+            <p>{{ notification.message }}</p>
+            <small>Kategori: {{ notification.category }} | Tarih: {{ notification.timestamp }}</small>
+        </div>
+        {% else %}
+        <p>📭 Henüz bildirim yok.</p>
+        {% endfor %}
+    </div>
+    
+    <!-- Geri Dön Butonu -->
+    <a href="{{ url_for('healthcare_dashboard') }}" class="back-button">⬅ Ana Sayfaya Dön</a>
+</body>
+</html>

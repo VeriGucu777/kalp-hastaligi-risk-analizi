@@ -1,0 +1,34 @@
+[
+    {
+        "ad": "Ummugulsum",
+        "soyad": "Coşkun",
+        "kimlik": "12345678901",
+        "email": "test@example.com",
+        "password": "123456",
+        "role": "hasta"
+    },
+    {
+        "ad": "Ahmet",
+        "soyad": "Yılmaz",
+        "kimlik": "98765432100",
+        "email": "saglik@example.com",
+        "password": "654321",
+        "role": "saglik_calisani"
+    },
+    {
+        "ad": "Ümmügülsüm",
+        "soyad": "Coşkun",
+        "kimlik": "27935428594",
+        "email": "ummugulsumcoskun21@gmail.com",
+        "password": "1234",
+        "role": "hasta"
+    },
+    {
+        "ad": "Ümmügülsüm",
+        "soyad": "Coşkun",
+        "kimlik": "27935428594",
+        "email": "ummugulsumcoskun21@gmail.com",
+        "password": "1234",
+        "role": "saglik_calisani"
+    }
+]

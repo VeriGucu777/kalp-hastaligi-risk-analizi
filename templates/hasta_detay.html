@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasta Detayları</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #e3f2fd;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 900px;
+            margin: auto;
+            margin-top: 20px;
+        }
+        h2 {
+            color: #007bff;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .card:hover {
+            background-color: #f0f8ff;
+        }
+        .modal-body ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .modal-body ul li {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .edit {
+            background-color: #007bff;
+            color: white;
+        }
+        .edit:hover {
+            background-color: #0056b3;
+        }
+        .delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .delete:hover {
+            background-color: #c0392b;
+        }
+        .back {
+            background-color: #28a745;
+            color: white;
+        }
+        .back:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="text-center">🏥 Hasta Detayları</h2>
+
+        <!-- 📌 1️⃣ Genel Hasta Bilgileri -->
+        <div class="card p-4 shadow">
+            <h4 class="mb-3">📌 Genel Bilgiler</h4>
+            <p><strong>Ad:</strong> {{ patient.name }}</p>
+            <p><strong>Yaş:</strong> {{ patient.age }}</p>
+            <p><strong>Cinsiyet:</strong> {{ patient.gender }}</p>
+            <p><strong>Hastalık:</strong> {{ patient.diagnosis }}</p>
+            <p><strong>Tedavi Durumu:</strong> {{ patient.treatment_status }}</p>
+            <p><strong>Kayıt Tarihi:</strong> {{ patient.kayit_tarihi.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+        </div>
+
+        <!-- 📌 Tıklanabilir Alanlar -->
+        {% for modal in ['rapor', 'randevu', 'tedavi', 'operasyon', 'alerji', 'ilac'] %}
+        <div class="card p-4 shadow mt-4" data-bs-toggle="modal" data-bs-target="#{{ modal }}Modal">
+            <h4 class="mb-3">{{ modal | capitalize }} Bilgileri</h4>
+            <p>Detayları görmek için tıklayın.</p>
+        </div>
+        {% endfor %}
+
+        <!-- 📌 Silme Onay Penceresi (Modal) -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Hastayı Sil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>{{ patient.name }} adlı hastayı silmek istediğinizden emin misiniz?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                        <form action="{{ url_for('hasta_sil', patient_id=patient.id) }}" method="POST">
+
+                            <button type="submit" class="btn btn-danger">🗑 Sil</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       <!-- 📌 İşlem Butonları -->
+<div class="d-flex justify-content-between mt-4">
+    <button class="button edit" onclick="editPatient({{ patient.id }})">✏ Düzenle</button
+    <button class="button back" onclick="goBack()">⬅ Geri Dön</button>
+</div>
+
+    </div>
+
+    <!-- 📌 Modal Pencereler -->
+    {% for modal in ['rapor', 'randevu', 'tedavi', 'operasyon', 'alerji', 'ilac'] %}
+    <div class="modal fade" id="{{ modal }}Modal" tabindex="-1" aria-labelledby="{{ modal }}ModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">{{ modal | capitalize }} Detayları</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        {% for item in patient[modal+'lar'] %}
+                            <li>{{ item }}</li>
+                        {% else %}
+                            <li>📌 Kayıtlı bilgi bulunmamaktadır.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+    <script>
+        function editPatient(patientId) {
+            window.location.href = `/edit_patient/${patientId}`;
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏥 Hastaneye Yatış ve Taburcu</title>
+    <style>
+        body {
+            background-color: #dfefff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: left;
+        }
+        h1 {
+            color: #007BFF;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #0056b3;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            background: #f0f8ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 6px solid #007BFF;
+        }
+        .section ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+        .section ul li {
+            font-size: 16px;
+            padding: 8px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+        .btn-primary {
+            background-color: #007BFF;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-back {
+            background-color: #28a745;
+            padding: 14px 22px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .btn-back:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🏥 Hastaneye Yatış ve Taburcu Süreci</h1>
+        <p>Hastaların hastaneye kabul edilme ve taburcu süreci ile ilgili tüm detayları buradan öğrenebilirsiniz.</p>
+
+        <div class="section">
+            <h2>📌 1. Hastaneye Yatış Süreci</h2>
+            <ul>
+                <li>📄 Hasta kabul işlemleri ve kimlik doğrulama</li>
+                <li>🩺 Tıbbi geçmişin değerlendirilmesi</li>
+                <li>🏥 Sigorta bilgileri ve onay süreci</li>
+                <li>🛏️ Hastane odası tahsisi ve yönlendirme</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📝 2. Tedavi ve Bakım Süreci</h2>
+            <ul>
+                <li>📅 Günlük doktor vizitleri</li>
+                <li>💊 İlaç uygulamaları ve tedavi planı</li>
+                <li>⚕️ Gerekirse özel bakım ve cerrahi işlemler</li>
+                <li>📊 Hasta izleme ve test sonuçlarının değerlendirilmesi</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🚪 3. Taburcu İşlemleri</h2>
+            <ul>
+                <li>✅ Son tıbbi değerlendirme ve doktor onayı</li>
+                <li>📋 Epikriz (hasta çıkış raporu) hazırlanması</li>
+                <li>💊 Reçete ve ilaç kullanım talimatları</li>
+                <li>📆 Kontrol randevusunun planlanması</li>
+            </ul>
+        </div>
+
+        <br>
+        <a href="{{ url_for('hastane_prosedurleri') }}" class="btn btn-back">🔙 Geri Dön</a>
+    </div>
+
+</body>
+</html>
+

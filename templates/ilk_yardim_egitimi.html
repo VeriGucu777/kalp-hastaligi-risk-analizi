@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🩺 Temel İlk Yardım Eğitimi</title>
+    <style>
+        body {
+            background-color: #dfefff; /* Açık mavi arka plan */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: left;
+        }
+        h1 {
+            color: #007BFF;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #0056b3;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+        .section {
+            background: #f0f8ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 6px solid #007BFF;
+        }
+        .section ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+        .section ul li {
+            font-size: 16px;
+            padding: 8px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+        .btn-primary {
+            background-color: #007BFF;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-back {
+            background-color: #28a745;
+            padding: 14px 22px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .btn-back:hover {
+            background-color: #218838;
+        }
+        .video-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .video-container a {
+            display: inline-block;
+            background-color: #FF0000;
+            color: white;
+            padding: 12px 20px;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .video-container a:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🩺 Temel İlk Yardım Eğitimi</h1>
+        <p>İlk yardım, hayat kurtarabilir! Burada temel ilk yardım adımlarını öğrenebilirsiniz.</p>
+
+        <div class="section">
+            <h2>📌 1. Güvenliği Sağlayın</h2>
+            <p>Öncelikle, kazazedenin ve kendi güvenliğinizin sağlandığından emin olun. Çevrede tehlike varsa, uzaklaşın ve acil yardım çağırın.</p>
+        </div>
+
+        <div class="section">
+            <h2>📌 2. Bilinç ve Solunum Kontrolü</h2>
+            <p>Kazazedenin bilincini kontrol edin. Tepki vermiyorsa, nefes alıp almadığını kontrol edin. Solunumu yoksa hemen CPR uygulayın.</p>
+        </div>
+
+        <div class="section">
+            <h2>📌 3. CPR (Kalp Masajı ve Suni Solunum)</h2>
+            <p>Kalbi durmuş bir kişiye **30 göğüs basısı** ve ardından **2 nefes verme (suni solunum)** şeklinde CPR uygulayın.</p>
+        </div>
+
+        <div class="section">
+            <h2>📌 4. Kanama Kontrolü</h2>
+            <p>Şiddetli kanama varsa, temiz bir bezle baskı uygulayarak kanamayı durdurmaya çalışın.</p>
+        </div>
+
+        <div class="section">
+            <h2>🚑 5. Şok Belirtileri ve Müdahale</h2>
+            <ul>
+                <li>🔸 Hızlı nabız ve solunum</li>
+                <li>🔸 Solgunluk ve terleme</li>
+                <li>🔸 Bilinç kaybı veya baş dönmesi</li>
+                <li>✅ Hastayı sırt üstü yatırarak ayaklarını yükseltin</li>
+                <li>✅ Üzerini örtüp sıcak tutun</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📞 Acil Durum Numaraları</h2>
+            <ul>
+                <li>📌 **112** - Acil Servis</li>
+                <li>📌 **155** - Polis</li>
+                <li>📌 **110** - İtfaiye</li>
+                <li>📌 **184** - Sağlık Danışma</li>
+            </ul>
+        </div>
+
+        <div class="video-container">
+            <h2>🎥 İlk Yardım Eğitim Videosu</h2>
+            <p>Bu videoyu izleyerek temel ilk yardım uygulamalarını öğrenebilirsiniz.</p>
+            <a href="https://www.youtube.com/watch?v=eYLu7dh6nUI" target="_blank">📺 YouTube'da İzle</a>
+        </div>
+
+        <br>
+        <a href="{{ url_for('egitim') }}" class="btn btn-back">🔙 Geri Dön</a>
+    </div>
+
+</body>
+</html>
+
+

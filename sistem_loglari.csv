@@ -1,0 +1,4 @@
+ID,Tarih,Kullanıcı,İşlem,Durum
+1,2025-03-16,Admin,Sistem başlatıldı,Bilgi
+2,2025-03-16,Admin,Yüksek CPU kullanımı,Uyarı
+3,2025-03-16,Admin,Veritabanı bağlantı hatası,Hata

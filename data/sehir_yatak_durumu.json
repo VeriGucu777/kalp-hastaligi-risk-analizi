@@ -1,0 +1,17 @@
+[
+    {
+        "hastane": "Ankara Şehir Hastanesi",
+        "adres": "Çankaya, Ankara",
+        "bos_yatak_sayisi": 5
+    },
+    {
+        "hastane": "İstanbul Eğitim ve Araştırma Hastanesi",
+        "adres": "Fatih, İstanbul",
+        "bos_yatak_sayisi": 2
+    },
+    {
+        "hastane": "İzmir Katip Çelebi Üniversitesi Hastanesi",
+        "adres": "Karşıyaka, İzmir",
+        "bos_yatak_sayisi": 7
+    }
+]

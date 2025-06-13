@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="{{ current_language }}"> <!-- Dinamik dil desteği -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ translate('hatirlaticilar') }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1565c0;
+            color: white;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: #ffffff;
+            color: #002d62;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        h2 {
+            color: #ff4444;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, textarea, button {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ff4444;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        button:hover {
+            background-color: #cc0000;
+            transform: scale(1.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #004080;
+            color: white;
+        }
+        td {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ translate('hatirlaticilar') }}</h2>
+
+        <!-- Kullanıcı Bilgi Formu -->
+        <form id="userForm">
+            <label for="userName">{{ translate('ad') }}:</label>
+            <input type="text" id="userName" placeholder="{{ translate('ad_placeholder') }}" required>
+            
+            <label for="userEmail">{{ translate('email') }}:</label>
+            <input type="email" id="userEmail" placeholder="{{ translate('email_placeholder') }}" required>
+        </form>
+
+        <!-- Hatırlatıcı Eklemek İçin Form -->
+        <form id="reminderForm">
+            <label for="reminderType">{{ translate('hatirlatici_turu') }}:</label>
+            <select id="reminderType">
+                <option value="medication">{{ translate('hatirlatici_ilac') }}</option>
+                <option value="appointment">{{ translate('hatirlatici_randevu') }}</option>
+                <option value="injection">{{ translate('hatirlatici_igne') }}</option>
+                <option value="note">{{ translate('hatirlatici_not') }}</option>
+            </select>
+
+            <label for="reminderDetails">{{ translate('hatirlatici_detay') }}:</label>
+            <textarea id="reminderDetails" rows="3" placeholder="{{ translate('hatirlatici_detay_placeholder') }}"></textarea>
+
+            <label for="reminderTime">{{ translate('hatirlatici_saati') }}:</label>
+            <input type="time" id="reminderTime">
+
+            <button type="button" onclick="addReminder()">{{ translate('hatirlatici_ekle') }}</button>
+        </form>
+
+        <!-- Hatırlatıcılar Tablosu -->
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ translate('tablo_turu') }}</th>
+                    <th>{{ translate('tablo_saati') }}</th>
+                    <th>{{ translate('tablo_detay') }}</th>
+                </tr>
+            </thead>
+            <tbody id="reminderList">
+                <!-- Dinamik olarak doldurulacak -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function addReminder() {
+            const type = document.getElementById('reminderType').value;
+            const details = document.getElementById('reminderDetails').value;
+            const time = document.getElementById('reminderTime').value;
+
+            const table = document.getElementById('reminderList');
+            const row = table.insertRow();
+            row.innerHTML = <td>${type}</td><td>${time || '--:--'}</td><td>${details}</td>;
+        }
+    </script>
+</body>
+</html>
+
+

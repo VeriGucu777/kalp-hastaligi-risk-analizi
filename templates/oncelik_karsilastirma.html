@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasta Öncelik Karşılaştırma</title>
+    <style>
+        /* Genel Sayfa Tasarımı */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef5ff;
+            text-align: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 100%;
+        }
+
+        button {
+            background-color: #0077b5;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #005f8a;
+        }
+
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #0077b5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hastalar Arası Öncelik Karşılaştırma</h1>
+        <form action="/oncelik_karsilastirma" method="post">
+
+            <label for="hasta1">Hasta 1 Seç:</label>
+            <select name="hasta1" id="hasta1" required>
+                {% for hasta in hastalar %}
+                <option value="{{ hasta.id }}">{{ hasta.adi }} - Aciliyet: {{ hasta.aciliyet }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="hasta2">Hasta 2 Seç:</label>
+            <select name="hasta2" id="hasta2" required>
+                {% for hasta in hastalar %}
+                <option value="{{ hasta.id }}">{{ hasta.adi }} - Aciliyet: {{ hasta.aciliyet }}</option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Kıyasla</button>
+        </form>
+
+        {% if sonuc %}
+        <div class="result">
+            <p>{{ sonuc }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+

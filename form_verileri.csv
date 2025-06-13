@@ -1,0 +1,6 @@
+yas,cinsiyet,bmi,nabiz,tansiyon_sistolik,tansiyon_diastolik,oksijen_doygunlugu,kalp_hastaligi,kanser,tansiyon_problemi,kolesterol_sorunu,panik_atak,son_ameliyat,kirik,cikik,kalp_krizi,ic_kanama,kesik,yaralanma,beyin_kanamasi,uzuv_kopmasi,sikisma,omurilik_zedelenmesi,agri_seviyesi,stres_seviyesi,tedavi_suresi,ekip_kapasitesi
+35,Kadın,55,12,12,7,23,Evet,Hayır,Evet,Evet,Evet,Evet,Hayır,Hayır,Evet,Hayır,Hayır,Hayır,Hayır,Hayır,Evet,Hayır,8,9,20,4
+41,Kadın,56,96,11,7,34,Evet,Hayır,Evet,Evet,Evet,Evet,Hayır,Hayır,Evet,Hayır,Hayır,Hayır,Evet,Hayır,Hayır,Hayır,8,9,25,3
+41,Kadın,58,90,12,8,28,Evet,Hayır,8,8,40,4
+41,Kadın,59,90,12,8,25,Evet,Hayır,Evet,Evet,Evet,Hayır,Hayır,Evet,Hayır,Evet,Hayır,Evet,Hayır,Hayır,8,9,30,4
+50,Erkek,60,100,70,112,45,Hayır,Hayır,Evet,Evet,Evet,Evet,Evet,Evet,Evet,Evet,Evet,Hayır,Evet,Hayır,8,8,50,4

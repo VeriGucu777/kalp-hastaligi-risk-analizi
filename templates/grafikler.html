@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafikler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333333;
+        }
+        h1 {
+            text-align: center;
+            color: #004080;
+        }
+        .grafik-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .grafik-container img {
+            max-width: 90%;
+            height: auto;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .grafik-container p {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #666666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Grafikler</h1>
+
+    <div class="grafik-container">
+        <img src="{{ url_for('static', filename='hasta_grafik/acil_durum_oranlari.png') }}" alt="Acil Durum Oranları">
+        <p>Bu grafik, acil durum kategorilerine göre hasta dağılımını göstermektedir.</p>
+    </div>
+
+    <div class="grafik-container">
+        <img src="{{ url_for('static', filename='hasta_grafik/hastalik_turu_dagilimi.png') }}" alt="Hastalık Türü Dağılımı">
+        <p>Hastaların karşılaştığı hastalık türlerinin dağılımını ifade eder.</p>
+    </div>
+
+    <div class="grafik-container">
+        <img src="{{ url_for('static', filename='hasta_grafik/kan_sekeri_dagilimi.png') }}" alt="Kan Şekeri Dağılımı">
+        <p>Kan şekeri seviyelerinin hastalar arasında nasıl dağıldığını gösterir.</p>
+    </div>
+
+    <div class="grafik-container">
+        <img src="{{ url_for('static', filename='hasta_grafik/nabiz_dagilimi.png') }}" alt="Nabız Dağılımı">
+        <p>Farklı nabız aralıklarındaki hasta oranlarını göstermektedir.</p>
+    </div>
+
+    <div class="grafik-container">
+        <img src="{{ url_for('static', filename='hasta_grafik/tansiyon_dagilimi.png') }}" alt="Tansiyon Dağılımı">
+        <p>Hastaların sistolik ve diastolik tansiyon değerlerinin dağılımını ifade eder.</p>
+    </div>
+
+</body>
+</html>

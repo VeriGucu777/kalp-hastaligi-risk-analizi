@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acil Durum İstatistikleri</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #eef5ff;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 900px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+        h2 {
+            color: #333;
+            font-weight: bold;
+        }
+        .chart-container {
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center mb-4">📊 Acil Durum İstatistikleri</h2>
+        <p class="text-center text-muted">Acil durumlarla ilgili güncel istatistikleri inceleyin.</p>
+
+        <!-- Aciliyet Seviyesi Dağılımı -->
+        <div class="chart-container">
+            <h4 class="text-center">🆘 Aciliyet Seviyesi Dağılımı</h4>
+            <canvas id="urgencyChart"></canvas>
+        </div>
+
+        <!-- Hastane Doluluk Oranı -->
+        <div class="chart-container">
+            <h4 class="text-center">🏥 Hastane Doluluk Oranı</h4>
+            <canvas id="occupancyChart"></canvas>
+        </div>
+
+        <!-- Acil Çağrı Sıklığı -->
+        <div class="chart-container">
+            <h4 class="text-center">⏳ Acil Çağrı Sıklığı</h4>
+            <canvas id="emergencyCallChart"></canvas>
+        </div>
+
+        <!-- 📌 PDF İndirme Butonu -->
+        <div class="text-center mt-4">
+            <button onclick="downloadPDF()" class="btn btn-success">
+                📥 PDF Olarak İndir
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // 📌 Aciliyet Seviyesi Dağılımı
+        var ctx1 = document.getElementById('urgencyChart').getContext('2d');
+        var urgencyChart = new Chart(ctx1, {
+            type: 'pie',
+            data: {
+                labels: ['Hafif', 'Orta', 'Kritik'],
+                datasets: [{
+                    data: [30, 50, 20],
+                    backgroundColor: ['#f1c40f', '#e67e22', '#e74c3c']
+                }]
+            }
+        });
+
+        // 📌 Hastane Doluluk Oranı
+        var ctx2 = document.getElementById('occupancyChart').getContext('2d');
+        var occupancyChart = new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Mevcut Yataklar', 'Dolu Yataklar'],
+                datasets: [{
+                    data: [40, 60],
+                    backgroundColor: ['#3498db', '#2ecc71']
+                }]
+            }
+        });
+
+        // 📌 Acil Çağrı Sıklığı
+        var ctx3 = document.getElementById('emergencyCallChart').getContext('2d');
+        var emergencyCallChart = new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: ['00:00', '06:00', '12:00', '18:00', '24:00'],
+                datasets: [{
+                    label: 'Acil Çağrılar',
+                    data: [5, 20, 35, 50, 25],
+                    borderColor: '#e74c3c',
+                    fill: false
+                }]
+            }
+        });
+
+        // 📌 PDF İndirme Fonksiyonu (Tüm Grafikleri İçerir)
+        function downloadPDF() {
+            var { jsPDF } = window.jspdf;
+            var pdf = new jsPDF("p", "mm", "a4"); // 📌 A4 formatında PDF oluştur
+
+            pdf.setFontSize(16);
+            pdf.text("Acil Durum İstatistikleri", 20, 20);
+
+            var charts = [
+                document.getElementById('urgencyChart'),
+                document.getElementById('occupancyChart'),
+                document.getElementById('emergencyCallChart')
+            ];
+
+            var yPosition = 40;
+
+            function addChartToPDF(index) {
+                if (index >= charts.length) {
+                    pdf.save("Acil_Durum_Istatistikleri.pdf"); // 📥 PDF olarak indir
+                    return;
+                }
+
+                html2canvas(charts[index]).then((canvas) => {
+                    var imgData = canvas.toDataURL('image/png');
+                    pdf.addImage(imgData, 'PNG', 15, yPosition, 180, 100);
+                    yPosition += 110;
+
+                    if (index < charts.length - 1) {
+                        pdf.addPage(); // 📌 Yeni sayfa ekle
+                        yPosition = 20;
+                    }
+
+                    addChartToPDF(index + 1);
+                });
+            }
+
+            addChartToPDF(0);
+        }
+    </script>
+
+</body>
+</html>
+

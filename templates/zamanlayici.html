@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⏳ Zamanlayıcı</title>
+    <style>
+        /* Açık mavi arka plan */
+        body {
+            background-color: #dfefff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* İçerik kutusu */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        /* Başlık stilleri */
+        h1 {
+            color: #007BFF;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #0056b3;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        /* Genel metin rengi */
+        p {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Zamanlayıcı ekranı */
+        #timer {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin: 15px 0;
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 6px solid #007BFF;
+            display: inline-block;
+            width: 200px;
+        }
+
+        /* Butonlar */
+        .btn {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            text-align: center;
+            margin: 10px;
+        }
+        .btn-primary {
+            background-color: #007BFF;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-stop {
+            background-color: #dc3545;
+        }
+        .btn-stop:hover {
+            background-color: #b52a3a;
+        }
+        .btn-reset {
+            background-color: #ffc107;
+            color: #333;
+        }
+        .btn-reset:hover {
+            background-color: #e0a800;
+        }
+        .btn-back {
+            background-color: #28a745;
+            padding: 14px 22px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .btn-back:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>⏳ Zamanlayıcı</h1>
+        <p>Belirli görevler için zamanlayıcıyı kullanabilirsiniz.</p>
+
+        <div id="timer">00:00:00</div>
+
+        <div>
+            <button class="btn btn-primary" onclick="startTimer()">⏳ Başlat</button>
+            <button class="btn btn-stop" onclick="stopTimer()">⏹ Durdur</button>
+            <button class="btn btn-reset" onclick="resetTimer()">🔄 Sıfırla</button>
+        </div>
+
+        <br>
+        <a href="{{ url_for('zaman_yonetimi') }}" class="btn btn-back">🔙 Geri Dön</a>
+    </div>
+
+    <script>
+        let timer;
+        let seconds = 0;
+
+        function startTimer() {
+            if (!timer) {
+                timer = setInterval(() => {
+                    seconds++;
+                    let hrs = String(Math.floor(seconds / 3600)).padStart(2, '0');
+                    let mins = String(Math.floor((seconds % 3600) / 60)).padStart(2, '0');
+                    let secs = String(seconds % 60).padStart(2, '0');
+                    document.getElementById("timer").textContent = `${hrs}:${mins}:${secs}`;
+                }, 1000);
+            }
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+            timer = null;
+        }
+
+        function resetTimer() {
+            stopTimer();
+            seconds = 0;
+            document.getElementById("timer").textContent = "00:00:00";
+        }
+    </script>
+
+</body>
+</html>
+

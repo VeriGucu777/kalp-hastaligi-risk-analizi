@@ -1,0 +1,224 @@
+ <!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acil Durum Çağrısı</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #add8e6; /* Açık mavi */
+    font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 50px;
+        }
+        h2 {
+            color: #721c24;
+            font-weight: bold;
+        }
+        .btn-custom {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 📌 Bildirim Stili */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #dc3545;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            font-weight: bold;
+            display: none;
+            z-index: 1000;
+            animation: fadein 0.5s, fadeout 0.5s 4.5s;
+        }
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeout {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 📌 Bildirim Alanı -->
+    <div id="notification" class="notification">
+        🚨 Acil çağrı başarıyla gönderildi!
+    </div>
+
+    <div class="container">
+        <h2 class="text-center mb-4">🚨 Acil Durum Çağrısı</h2>
+        <p class="text-center text-muted">Acil durum bildirimlerinizi buradan oluşturabilirsiniz.</p>
+
+        <!-- 📌 Acil Çağrı Formu -->
+        <form id="emergencyForm" action="{{ url_for('acil_durum_cagri') }}" method="post" class="mb-4">
+            <div class="mb-3">
+                <label for="patient_name" class="form-label">Hasta Adı:</label>
+                <input type="text" class="form-control" id="patient_name" name="patient_name" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="emergency_level" class="form-label">Aciliyet Seviyesi:</label>
+                <select class="form-control" id="emergency_level" name="emergency_level" required>
+                    <option value="1">⚠ Hafif</option>
+                    <option value="2">🚑 Orta</option>
+                    <option value="3">🔥 Kritik</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Açıklama:</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-danger btn-custom">🚨 Acil Çağrı Gönder</button>
+        </form>
+
+        <!-- 📌 Yeni Eklenen Butonlar -->
+        <div class="text-center mt-4">
+            <h4>⚡ Acil Müdahale Seçenekleri</h4>
+
+            <!-- Hastane İçi Acil Çağrı -->
+            <a href="{{ url_for('hastane_ici_acil') }}" class="btn btn-danger btn-lg m-2">
+                🏥 Hastane İçi Acil Çağrı
+            </a>
+
+            <!-- Dış Acil Çağrı -->
+            <a href="{{ url_for('dis_acil') }}" class="btn btn-primary btn-lg m-2">
+                📞 Dış Acil Çağrı (En Yakın Hastane)
+            </a>
+
+            <!-- Konum İzni Butonu -->
+            <button onclick="getLocation()" class="btn btn-success btn-lg m-2">
+                📍 Konumumu Kullan ve Yönlendir
+            </button>
+
+            <p id="konumBilgisi" class="text-muted mt-3"></p>
+        </div>
+    </div>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                document.getElementById("konumBilgisi").innerHTML = "Cihazınız konum servisini desteklemiyor.";
+            }
+        }
+
+        function showPosition(position) {
+            let latitude = position.coords.latitude;
+            let longitude = position.coords.longitude;
+            document.getElementById("konumBilgisi").innerHTML =
+                "Konum Alındı ✅ (" + latitude + ", " + longitude + ")";
+            window.location.href = /en_yakin_hastane?lat=${latitude}&lon=${longitude};
+        }
+
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    document.getElementById("konumBilgisi").innerHTML = "Konum izni reddedildi.";
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    document.getElementById("konumBilgisi").innerHTML = "Konum bilgisi alınamıyor.";
+                    break;
+                case error.TIMEOUT:
+                    document.getElementById("konumBilgisi").innerHTML = "Konum alma süresi doldu.";
+                    break;
+                default:
+                    document.getElementById("konumBilgisi").innerHTML = "Bilinmeyen hata.";
+            }
+        }
+                  // 📌 Bildirimi Gösterme Fonksiyonu
+        function showNotification() {
+            let notification = document.getElementById("notification");
+            notification.style.display = "block";
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 5000); // 5 saniye sonra kaybolacak
+        }
+
+        // 📌 Form Gönderildiğinde Bildirimi Göster
+        document.getElementById("emergencyForm").onsubmit = function(event) {
+            event.preventDefault(); // Sayfanın yeniden yüklenmesini önler
+            showNotification();
+            setTimeout(() => {
+                this.submit(); // Formu gönder
+            }, 1000);
+        };
+
+        // 📌 Hastane içi acil çağrıyı hasta takip sistemine düşürme
+        function hastaneIciCagri() {
+            fetch('/hastane_ici_acil_cagri', { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    alert("🏥 Hastane içi acil çağrı gönderildi!");
+                });
+        }
+
+        // 📌 Kullanıcının konumunu alıp SMS ile gönderen fonksiyon
+        function konumSMSGonder() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    let latitude = position.coords.latitude;
+                    let longitude = position.coords.longitude;
+                    let smsLink = sms:+905321234567?body=🚨 Acil Durum! Konum: (${latitude}, ${longitude});
+                    window.location.href = smsLink;
+                });
+            } else {
+                alert("Konum servisi desteklenmiyor.");
+            }
+        }
+
+        // 📌 API üzerinden acil servis çağrısı yapma
+        function acilServisBildirimiGonder() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    let latitude = position.coords.latitude;
+                    let longitude = position.coords.longitude;
+
+                    fetch('/acil_servis_api', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            hasta_adi: "Ümmügülsüm Coşkun",
+                            aciliyet: "Kritik",
+                            konum: ${latitude}, ${longitude},
+                            telefon: "+905321234567"
+                        })
+                    }).then(response => response.json())
+                      .then(data => {
+                          alert("🚀 Acil servis bildirimi başarıyla gönderildi!");
+                      });
+                });
+            } else {
+                alert("Konum servisi desteklenmiyor.");
+            }
+        }
+    </script>
+</body>
+</html>
+

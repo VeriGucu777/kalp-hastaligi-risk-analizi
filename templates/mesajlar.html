@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesajlar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .message-box {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .unread {
+            background-color: #ffeb3b;
+        }
+        .read {
+            background-color: #dff0d8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>✉️ Mesajlar</h2>
+
+        <div class="message-box unread">
+            <strong>📩 Yeni Mesaj</strong>
+            <p>Hasta takip sistemine yeni hasta eklendi.</p>
+            <small>10 dakika önce</small>
+        </div>
+
+        <div class="message-box read">
+            <strong>📩 Güncelleme</strong>
+            <p>Hasta takip sistemine yeni rapor eklendi.</p>
+            <small>1 saat önce</small>
+        </div>
+
+        <div class="message-box read">
+            <strong>📩 Sistem Güncellemesi</strong>
+            <p>Sunucu bakımı tamamlandı.</p>
+            <small>1 gün önce</small>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ translate('saglik_onerileri') }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1565c0;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            background: #e3f2fd;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #d32f2f;
+            font-size: 20px;
+            border-bottom: 2px solid #d32f2f;
+            padding-bottom: 5px;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 8px;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #1565c0;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0d47a1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ translate('saglik_onerileri') }}</h1>
+
+        <div class="section">
+            <h2>{{ translate('tansiyon') }}</h2>
+            <p>{{ translate('tansiyon_yuksek') }}</p>
+            <ul>
+                <li>{{ translate('tansiyon_tuz') }}</li>
+                <li>{{ translate('tansiyon_su') }}</li>
+                <li>{{ translate('tansiyon_stres') }}</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>{{ translate('kan_sekeri') }}</h2>
+            <p>{{ translate('kan_sekeri_yuksek') }}</p>
+            <ul>
+                <li>{{ translate('kan_sekeri_seker_kacinin') }}</li>
+                <li>{{ translate('kan_sekeri_egzersiz') }}</li>
+                <li>{{ translate('kan_sekeri_ilac') }}</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>{{ translate('nabiz') }}</h2>
+            <p>{{ translate('nabiz_oneriler') }}</p>
+            <ul>
+                <li>{{ translate('nabiz_dinlen') }}</li>
+                <li>{{ translate('nabiz_su') }}</li>
+                <li>{{ translate('nabiz_danis') }}</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>{{ translate('kronik_hastaliklar') }}</h2>
+            <ul>
+                <li><strong>{{ translate('kalp_hastaliklari') }}</strong>: {{ translate('kalp_egzersiz') }}</li>
+                <li><strong>{{ translate('diabetes') }}</strong>: {{ translate('diabetes_diyet') }}</li>
+                <li><strong>{{ translate('kanser') }}</strong>: {{ translate('kanser_tarama') }}</li>
+                <li><strong>{{ translate('astim') }}</strong>: {{ translate('astim_alergen') }}</li>
+                <li><strong>{{ translate('obezite') }}</strong>: {{ translate('obezite_egzersiz') }}</li>
+            </ul>
+        </div>
+
+        <a href="{{ url_for('ana_sayfa') }}" class="button">{{ translate('geri_don') }}</a>
+    </div>
+</body>
+</html>

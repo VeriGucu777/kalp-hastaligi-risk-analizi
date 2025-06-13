@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📅 Randevu Takibi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #dfefff; /* Açık mavi arka plan */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+        }
+        .btn-delete:hover {
+            background-color: #b02a37;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📅 Randevu Takibi</h1>
+        <p>Hasta randevularını buradan yönetin.</p>
+
+        <!-- 📌 Yeni Randevu Ekleme Formu -->
+        <h2>➕ Yeni Randevu Ekle</h2>
+        <form action="{{ url_for('randevu_ekle') }}" method="POST">
+            <input type="text" name="hasta_adi" placeholder="Hasta Adı" required class="form-control mb-2">
+            <input type="datetime-local" name="randevu_tarihi" required class="form-control mb-2">
+            <button type="submit" class="btn btn-primary">📅 Randevu Kaydet</button>
+        </form>
+
+        <hr>
+
+        <!-- 📌 Mevcut Randevular Listesi -->
+        <h2>📋 Mevcut Randevular</h2>
+        <ul>
+            {% for randevu in randevular %}
+                <li>
+                    <strong>{{ randevu.hasta_adi }}</strong> - {{ randevu.randevu_tarihi }}
+                    <a href="{{ url_for('randevu_sil', randevu_id=randevu.id) }}" class="btn btn-delete btn-sm">🗑 Sil</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <br>
+        <button onclick="window.location.href='{{ url_for('hastane_yonetimi') }}'" class="btn btn-secondary">🔙 Geri Dön</button>
+    </div>
+
+</body>
+</html>

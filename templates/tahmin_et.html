@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahmin Sonucu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #d6eaf8;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            color: #003366;
+        }
+        .tahmin-sonucu {
+            font-size: 32px;
+            font-weight: bold;
+            color: #004085;
+            margin-top: 20px;
+        }
+        .bilgi {
+            font-size: 22px;
+            margin: 10px 0;
+        }
+        .grafik-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        img {
+            width: 700px;
+            height: auto;
+            margin-top: 10px;
+            border-radius: 10px;
+            box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 22px;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+        .warning {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📊 Tahmin Sonucu</h1>
+
+    {% if tahmin_sonucu %}
+        <div class="tahmin-sonucu">📢 {{ tahmin_sonucu }}</div>
+        <p class="bilgi">📌 <b>Acil Değil Olasılığı:</b> {{ dusuk_oncelik }}%</p>
+        <p class="bilgi">📌 <b>Acil Olasılığı:</b> {{ orta_oncelik }}%</p>
+        <p class="bilgi">📌 <b>Çok Acil Olasılığı:</b> {{ yuksek_oncelik }}%</p>
+
+        {% if grafik_path %}
+    <div class="grafik-container">
+        <h2>📊 Olasılık Dağılımı</h2>
+        <img src="{{ url_for('static', filename=grafik_path) }}" alt="Tahmin Grafiği">
+    </div>
+{% else %}
+    <p class="warning">⚠️ Grafik oluşturulmadı.</p>
+{% endif %}
+
+
+    {% else %}
+        <h2 class="warning">⚠️ Henüz bir tahmin yapılmadı.</h2>
+    {% endif %}
+
+    <br>
+    <a class="btn" href="/form">↩ Yeni Tahmin Yap</a>
+
+</body>
+</html>
+
+

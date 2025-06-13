@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bildirimler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            background-color: #2c3e50;
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar ul li {
+            padding: 10px;
+            border-bottom: 1px solid #34495e;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .sidebar ul li:hover {
+            background-color: #34495e;
+        }
+        .sidebar ul li a {
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+        h2 {
+            color: #2c3e50;
+        }
+        .notification-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .notification {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        .unread {
+            background-color: #ffeb3b;
+        }
+        .read {
+            background-color: #dff0d8;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sol Menü -->
+    <div class="sidebar">
+        <h2>🔔 Bildirimler</h2>
+        <ul>
+            <li><a href="{{ url_for('bildirimler') }}">📩 Tüm Bildirimler</a></li>
+            <li><a href="{{ url_for('okunmayan_bildirimler') }}">📬 Okunmayanlar</a></li>
+            <li><a href="{{ url_for('okunan_bildirimler') }}">📖 Okunanlar</a></li>
+        </ul>
+    </div>
+
+    <!-- Bildirimler Sayfası -->
+    <div class="content">
+        <h2>🔔 Bildirimler</h2>
+
+        <div class="notification-container">
+            {% if notifications %}
+                {% for notification in notifications %}
+                    <div class="notification {% if not notification.is_read %}unread{% else %}read{% endif %}">
+                        <h3>{{ notification.title }}</h3>
+                        <p>{{ notification.message }}</p>
+                        <small>Kategori: {{ notification.category }} | Tarih: {{ notification.timestamp }}</small>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>📭 Henüz bildirim yok.</p>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
+
+

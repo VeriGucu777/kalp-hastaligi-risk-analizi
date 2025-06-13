@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="title">Hasta Paneli</title>
+    <style>
+        /* Stil kodları burada kalabilir */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 id="hasta_paneli_title">Hasta Paneli</h2>
+
+        <form id="hastaForm">
+            <div class="form-group">
+                <label for="patient_name" id="patient_name_label">Hasta Adı:</label>
+                <input type="text" id="patient_name" placeholder="Hasta adını girin">
+            </div>
+            <div class="form-group">
+                <label for="age" id="age_label">Yaş:</label>
+                <input type="number" id="age" placeholder="Yaşı girin">
+            </div>
+            <div class="form-group">
+                <label for="gender" id="gender_label">Cinsiyet:</label>
+                <select id="gender">
+                    <option id="gender_male" value="male">Erkek</option>
+                    <option id="gender_female" value="female">Kadın</option>
+                    <option id="gender_other" value="other">Diğer</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="pulse" id="pulse_label">Nabız:</label>
+                <input type="number" id="pulse" placeholder="Örn: 72">
+            </div>
+            <div class="form-group">
+                <label for="systolic" id="systolic_label">Tansiyon Sistolik:</label>
+                <input type="number" id="systolic" placeholder="Örn: 120">
+            </div>
+            <div class="form-group">
+                <label for="diastolic" id="diastolic_label">Tansiyon Diastolik:</label>
+                <input type="number" id="diastolic" placeholder="Örn: 80">
+            </div>
+            <div class="form-group">
+                <label for="blood_sugar" id="blood_sugar_label">Kan Şekeri:</label>
+                <input type="number" id="blood_sugar" placeholder="Örn: 100">
+            </div>
+            <button type="button" id="save_button">Kaydet</button>
+        </form>
+    </div>
+
+    <script>
+        // JSON çeviriler
+        const translations = {
+            "de": {
+                "title": "Gesundheitsprioritätensystem",
+                "hasta_paneli_title": "Patientenpanel",
+                "patient_name_label": "Patientenname:",
+                "patient_name_placeholder": "Geben Sie den Namen des Patienten ein",
+                "age_label": "Alter:",
+                "age_placeholder": "Geben Sie das Alter des Patienten ein",
+                "gender_label": "Geschlecht:",
+                "gender_male": "Männlich",
+                "gender_female": "Weiblich",
+                "gender_other": "Andere",
+                "pulse_label": "Puls:",
+                "pulse_placeholder": "Beispiel: 72",
+                "systolic_label": "Systolischer Blutdruck:",
+                "systolic_placeholder": "Beispiel: 120",
+                "diastolic_label": "Diastolischer Blutdruck:",
+                "diastolic_placeholder": "Beispiel: 80",
+                "blood_sugar_label": "Blutzucker:",
+                "blood_sugar_placeholder": "Beispiel: 100",
+                "save_button": "Speichern"
+            },
+            // Diğer diller eklenebilir
+        };
+
+        // Çeviri fonksiyonu
+        function translate(lang) {
+            const keys = Object.keys(translations[lang]);
+            keys.forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    if (element.placeholder) {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+        }
+
+        // Örnek: Almanca'ya geçiş
+        translate('de'); // 'de' yerine farklı dil kodları eklenebilir
+    </script>
+</body>
+</html>
+
+
+

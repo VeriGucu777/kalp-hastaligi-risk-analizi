@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <h1 class="welcome-text">Welcome</h1>
+
+        <form action="{{ url_for('giris') }}" method="POST">
+            <label for="ad">Ad:</label>
+            <input type="text" id="ad" name="ad" required>
+
+            <label for="soyad">Soyad:</label>
+            <input type="text" id="soyad" name="soyad" required>
+
+            <label for="kimlik">Kimlik Bilgisi:</label>
+            <input type="text" id="kimlik" name="kimlik" required>
+
+            <label for="email">Mail Adresi:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password">Şifre:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="role">Rol Seçimi:</label>
+            <select id="role" name="role">
+                <option value="hasta">Hasta</option>
+                <option value="saglik_calısani">Sağlık Çalışanı</option>
+            </select>
+
+            <button type="submit">Giriş Yap</button>
+        </form>
+
+        <div class="extra-links">
+            <!-- <a href="{{ url_for('sifremi_unuttum') }}">Şifremi Unuttum</a> | -->
+            <a href="{{ url_for('kayit_ol') }}">Kayıt Ol</a>
+        </div>
+
+        <div class="info-text">
+            <p>
+                <input type="checkbox" id="agreement" required>
+                <label for="agreement">Aydınlatma metni ve gizlilik sözleşmesini okudum, kabul ediyorum.</label>
+            </p>
+        </div>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>
+

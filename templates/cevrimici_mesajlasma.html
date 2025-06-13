@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💬 Mesajlaşma Paneli</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #add8e6;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+        .message-box {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .incoming { background-color: #d1ecf1; text-align: left; }
+        .outgoing { background-color: #c3e6cb; text-align: right; }
+        .unread { font-weight: bold; }
+        .btn-group { display: flex; gap: 5px; }
+        .badge {
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 10px;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+        .alert-box {
+            display: none;
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>💬 Çevrimiçi Mesajlaşma</h2>
+
+        <!-- 📌 Bildirim Alanı -->
+        <div id="alertBox" class="alert alert-success alert-box" role="alert">
+            ✅ Mesaj başarıyla gönderildi!
+        </div>
+
+        <!-- 📌 Mesaj Gönderme Formu -->
+        <form id="mesajForm">
+            <div class="mb-3">
+                <label for="alici_id" class="form-label">📩 Alıcı ID:</label>
+                <input type="text" class="form-control" id="alici_id" required>
+            </div>
+            <div class="mb-3">
+                <label for="icerik" class="form-label">✍ Mesaj İçeriği:</label>
+                <textarea class="form-control" id="icerik" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">📩 Gönder</button>
+        </form>
+
+        <!-- 📌 Filtreleme -->
+        <h3 class="mt-4">📂 Mesajlar</h3>
+        <button class="btn btn-secondary" onclick="mesajlariGetir('gelen')">📥 Gelen Mesajlar <span id="gelenBadge" class="badge"></span></button>
+        <button class="btn btn-secondary" onclick="mesajlariGetir('giden')">📤 Giden Mesajlar <span id="gidenBadge" class="badge"></span></button>
+
+        <div id="mesajlar"></div>
+    </div>
+
+    <script>
+        let currentUserId = "{{ current_user.id if current_user.is_authenticated else '' }}"; // ✅ Giriş yapılmış mı kontrol et!
+
+        // 📌 Mesajları Yükleme (Filtreye Göre)
+        function mesajlariGetir(tur = "gelen") {
+            fetch('/mesaj_kutusu')
+                .then(response => response.json())
+                .then(data => {
+                    let mesajHtml = "";
+                    let gelenSayisi = 0;
+                    let gidenSayisi = 0;
+
+                    let mesajlar = tur === "gelen" ? data.gelen_mesajlar : tur === "giden" ? data.giden_mesajlar : [];
+
+                    mesajlar.forEach(msg => {
+                        let sinif = msg.gonderen === currentUserId ? "outgoing" : "incoming";
+                        let durum = msg.okundu ? "✔ Okundu" : "⏳ Bekliyor";
+                        let durumRenk = msg.okundu ? "success" : "warning";
+
+                        mesajHtml += `<div class="message-box ${sinif}">
+                            <div>
+                                <strong>${msg.gonderen ? msg.gonderen : msg.alici}:</strong> ${msg.icerik} <br>
+                                <small>${msg.tarih}</small>
+                            </div>
+                            <div class="btn-group">
+                                <button onclick="mesajOkundu(${msg.id})" class="btn btn-${durumRenk} btn-sm">${durum}</button>
+                                <button onclick="mesajSil(${msg.id})" class="btn btn-danger btn-sm">🗑 Sil</button>
+                            </div>
+                        </div>`;
+
+                        if (!msg.okundu && tur === "gelen") gelenSayisi++; 
+                        if (tur === "giden") gidenSayisi++;
+                    });
+
+                    document.getElementById("mesajlar").innerHTML = mesajHtml;
+                    document.getElementById("gelenBadge").innerText = gelenSayisi > 0 ? gelenSayisi : "";
+                    document.getElementById("gidenBadge").innerText = gidenSayisi > 0 ? gidenSayisi : "";
+                })
+                .catch(error => console.error("Hata:", error));
+        }
+
+        // 📌 Mesaj Gönderme
+        document.getElementById("mesajForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let alici_id = document.getElementById("alici_id").value.trim();
+            let icerik = document.getElementById("icerik").value.trim();
+
+            if (!alici_id || !icerik) {
+                alert("Lütfen alıcı ID'sini ve mesaj içeriğini doldurun!");
+                return;
+            }
+
+            fetch('/mesaj_gonder', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ alici_id, icerik })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    mesajlariGetir("giden");
+                    document.getElementById("mesajForm").reset();
+                    mesajGonderildiBildirimi();
+                } else {
+                    alert("Mesaj gönderilirken hata oluştu: " + data.error);
+                }
+            })
+            .catch(error => console.error("Hata:", error));
+        });
+
+        // ✅ Mesaj Gönderildi Bildirimi
+        function mesajGonderildiBildirimi() {
+            let alertBox = document.getElementById("alertBox");
+            alertBox.style.display = "block";
+            setTimeout(() => { alertBox.style.display = "none"; }, 3000);
+        }
+
+        mesajlariGetir();
+        setInterval(() => mesajlariGetir("gelen"), 5000);
+    </script>
+
+</body>
+</html>
+
+

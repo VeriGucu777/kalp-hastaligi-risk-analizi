@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ translations['saglik_onerileri'] }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1565c0; /* Mavi arka plan */
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #002d62;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff4444; /* Kırmızı başlık */
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        h2 {
+            color: #ff4444; /* Kırmızı başlık */
+            margin-top: 20px;
+            border-bottom: 2px solid #ff4444; /* Kırmızı alt çizgi */
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            color: #ff4444; /* Kırmızı alt başlık */
+            margin-top: 15px;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #ff4444; /* Kırmızı düğme */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        a:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <p>Translations Test: {{ translations }}</p>
+    <div class="container">
+        <h1>{{ translations['saglik_onerileri'] }}</h1>
+
+        <h2>{{ translations['tansiyon'] }}</h2>
+        <p>{{ translations['tansiyon_yuksek'] }}</p>
+        <ul>
+            <li>{{ translations['tansiyon_tuz'] }}</li>
+            <li>{{ translations['tansiyon_su'] }}</li>
+            <li>{{ translations['tansiyon_stres'] }}</li>
+        </ul>
+        <p>{{ translations['tansiyon_dusuk'] }}</p>
+        <ul>
+            <li>{{ translations['tansiyon_tuzlu'] }}</li>
+            <li>{{ translations['tansiyon_kucuk_ogunler'] }}</li>
+            <li>{{ translations['tansiyon_yavas_kalk'] }}</li>
+        </ul>
+
+        <h2>{{ translations['kan_sekeri'] }}</h2>
+        <p>{{ translations['kan_sekeri_yuksek'] }}</p>
+        <ul>
+            <li>{{ translations['kan_sekeri_seker_kacinin'] }}</li>
+            <li>{{ translations['kan_sekeri_egzersiz'] }}</li>
+            <li>{{ translations['kan_sekeri_ilac'] }}</li>
+        </ul>
+        <p>{{ translations['kan_sekeri_dusuk'] }}</p>
+        <ul>
+            <li>{{ translations['kan_sekeri_hizli_karbonhidrat'] }}</li>
+            <li>{{ translations['kan_sekeri_duzenli_ogun'] }}</li>
+        </ul>
+
+        <h2>{{ translations['nabiz'] }}</h2>
+        <p>{{ translations['nabiz_oneriler'] }}</p>
+        <ul>
+            <li>{{ translations['nabiz_dinlen'] }}</li>
+            <li>{{ translations['nabiz_su'] }}</li>
+            <li>{{ translations['nabiz_danis'] }}</li>
+        </ul>
+
+        <h2>{{ translations['kronik_hastaliklar'] }}</h2>
+        <h3>{{ translations['kalp_hastaliklari'] }}</h3>
+        <ul>
+            <li>{{ translations['kalp_yag'] }}</li>
+            <li>{{ translations['kalp_egzersiz'] }}</li>
+            <li>{{ translations['kalp_kontrol'] }}</li>
+        </ul>
+
+        <h3>{{ translations['diabetes'] }}</h3>
+        <ul>
+            <li>{{ translations['diabetes_seker'] }}</li>
+            <li>{{ translations['diabetes_olcum'] }}</li>
+            <li>{{ translations['diabetes_diyet'] }}</li>
+        </ul>
+
+        <h3>{{ translations['kanser'] }}</h3>
+        <ul>
+            <li>{{ translations['kanser_beslenme'] }}</li>
+            <li>{{ translations['kanser_sigara'] }}</li>
+            <li>{{ translations['kanser_tarama'] }}</li>
+        </ul>
+
+        <h3>{{ translations['astim'] }}</h3>
+        <ul>
+            <li>{{ translations['astim_alergen'] }}</li>
+            <li>{{ translations['astim_egzersiz'] }}</li>
+            <li>{{ translations['astim_ilac'] }}</li>
+        </ul>
+
+        <h3>{{ translations['obezite'] }}</h3>
+        <ul>
+            <li>{{ translations['obezite_diyet'] }}</li>
+            <li>{{ translations['obezite_egzersiz'] }}</li>
+            <li>{{ translations['obezite_sik_ogun'] }}</li>
+        </ul>
+
+        <a href="{{ url_for('ana_sayfa') }}">{{ translations['geri_don'] }}</a>
+    </div>
+</body>
+</html>
+

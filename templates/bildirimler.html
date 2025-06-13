@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bildirimler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0d1b2a;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h2 {
+            color: #ffffff;
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+        }
+        .notification-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            max-width: 700px;
+            width: 100%;
+        }
+        .notification {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 6px solid;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            transition: all 0.3s ease-in-out;
+        }
+        .unread {
+            background-color: #cce5ff;
+            border-left-color: #007bff;
+        }
+        .read {
+            background-color: #d4edda;
+            border-left-color: #28a745;
+        }
+        .archived {
+            background-color: #f9f9f9;
+            border-left-color: #aaa;
+        }
+        .button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        .button:hover {
+            background-color: #c0392b;
+        }
+        .archive-button {
+            background-color: #3498db;
+        }
+        .archive-button:hover {
+            background-color: #2980b9;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>🔔 Bildirimler</h2>
+    <div class="notification-container">
+        {% for notification in notifications %}
+            <div class="notification {% if notification.is_archived %}archived{% elif notification.is_read %}read{% else %}unread{% endif %}" id="notification-{{ notification.id }}">
+                <h3>{{ notification.title }}</h3>
+                <p>{{ notification.message }}</p>
+                
+                <!-- 📌 Sil ve Arşivle Butonları -->
+                <button class="button" onclick="deleteNotification({{ notification.id }})">❌ Sil</button>
+                {% if not notification.is_archived %}
+                    <button class="button archive-button" onclick="archiveNotification({{ notification.id }})">📂 Arşivle</button>
+                {% endif %}
+            </div>
+        {% else %}
+            <p style="text-align: center; color: white;">📭 Henüz bildirim yok.</p>
+        {% endfor %}
+    </div>
+
+    <script>
+        function deleteNotification(notificationId) {
+            fetch(`/bildirim_sil/${notificationId}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        let notification = document.getElementById(`notification-${notificationId}`);
+                        notification.classList.add("hidden"); // Animasyonla kaybolma efekti
+                        setTimeout(() => notification.remove(), 300);
+                    }
+                })
+                .catch(error => console.error("Silme işlemi başarısız:", error));
+        }
+
+        function archiveNotification(notificationId) {
+            fetch(`/bildirim_arsivle/${notificationId}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        let notification = document.getElementById(`notification-${notificationId}`);
+                        notification.classList.remove("unread", "read");
+                        notification.classList.add("archived");
+                        notification.innerHTML += "<p>📦 Bu bildirim arşivlendi.</p>";
+                    }
+                })
+                .catch(error => console.error("Arşivleme işlemi başarısız:", error));
+        }
+    </script>
+</body>
+</html>
+
+

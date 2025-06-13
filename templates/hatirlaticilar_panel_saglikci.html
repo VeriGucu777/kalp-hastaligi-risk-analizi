@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📅 Hatırlatıcılar</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #add8e6;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+        .reminder-box {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .normal {
+            background-color: #d1ecf1;
+        }
+        .critical {
+            background-color: #ffcccc;
+            border: 2px solid red;
+        }
+        .btn-group {
+            display: flex;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>📅 Hatırlatıcılar</h2>
+
+        <!-- 📌 Hatırlatıcı Ekleme Formu -->
+        <form id="hatirlaticiForm">
+            <div class="mb-3">
+                <label for="baslik" class="form-label">📌 Hatırlatma Başlığı:</label>
+                <input type="text" class="form-control" id="baslik" required>
+            </div>
+            <div class="mb-3">
+                <label for="aciklama" class="form-label">📝 Açıklama:</label>
+                <textarea class="form-control" id="aciklama" rows="2"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="tarih" class="form-label">📅 Tarih ve Saat:</label>
+                <input type="datetime-local" class="form-control" id="tarih" required>
+            </div>
+            <button type="submit" class="btn btn-primary">➕ Hatırlatıcı Ekle</button>
+        </form>
+
+        <!-- 📌 Hatırlatıcı Listesi -->
+        <h3 class="mt-4">📂 Hatırlatıcılarım</h3>
+        <div id="hatirlaticilar"></div>
+    </div>
+
+    <script>
+        // 📌 Hatırlatıcıları Yükleme
+        function hatirlaticilariGetir() {
+            fetch("{{ url_for('hatirlatici_listele') }}") 
+                .then(response => response.json())
+                .then(data => {
+                    let html = "";
+                    if (data.hatirlaticilar) {
+                        data.hatirlaticilar.forEach(h => {
+                            let sinif = h.kritik ? "critical" : "normal";
+                            html += `
+                                <div class="reminder-box ${sinif}">
+                                    <div>
+                                        <strong>${h.baslik}</strong> - ${h.tarih} <br>
+                                        <small>${h.aciklama}</small>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button onclick="hatirlaticiSil(${h.id})" class="btn btn-danger btn-sm">🗑 Sil</button>
+                                    </div>
+                                </div>
+                            `;
+
+                            if (h.kritik) {
+                                bildirimGoster(h.baslik, h.aciklama);
+                            }
+                        });
+                    } else {
+                        html = "<p>Henüz hatırlatıcı eklenmemiş.</p>";
+                    }
+
+                    document.getElementById("hatirlaticilar").innerHTML = html;
+                })
+                .catch(error => console.error("Hatırlatıcıları yüklerken hata oluştu:", error));
+        }
+
+        // 📌 Yeni Hatırlatıcı Ekleme
+        document.getElementById("hatirlaticiForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let baslik = document.getElementById("baslik").value.trim();
+            let aciklama = document.getElementById("aciklama").value.trim();
+            let tarih = document.getElementById("tarih").value;
+
+            if (!baslik || !tarih) {
+                alert("Başlık ve tarih alanları zorunludur!");
+                return;
+            }
+
+            fetch("{{ url_for('hatirlatici_ekle') }}", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ baslik, aciklama, tarih })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    hatirlaticilariGetir(); // Listeyi güncelle
+                    document.getElementById("hatirlaticiForm").reset();
+                } else {
+                    alert("Hatırlatıcı eklenirken hata oluştu!");
+                }
+            })
+            .catch(error => console.error("Hatırlatıcı ekleme hatası:", error));
+        });
+
+        // 📌 Hatırlatıcı Silme
+        function hatirlaticiSil(id) {
+            fetch(`{{ url_for('hatirlatici_sil', hatir_id=0) }}`.replace("0", id), { method: 'DELETE' })
+            .then(response => {
+                if (response.ok) {
+                    hatirlaticilariGetir();
+                } else {
+                    alert("Hatırlatıcı silinemedi!");
+                }
+            })
+            .catch(error => console.error("Hatırlatıcı silme hatası:", error));
+        }
+
+        // 📌 Bildirim Gösterme
+        function bildirimGoster(baslik, aciklama) {
+            if (Notification.permission === "granted") {
+                new Notification(baslik, { body: aciklama, icon: "https://cdn-icons-png.flaticon.com/512/565/565547.png" });
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification(baslik, { body: aciklama });
+                    }
+                });
+            }
+        }
+
+        // 📌 Sayfa yüklendiğinde hatırlatıcıları getir
+        document.addEventListener("DOMContentLoaded", function() {
+            hatirlaticilariGetir();
+        });
+    </script>
+</body>
+</html>

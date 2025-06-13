@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ translate('emergency_panel') }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1565c0;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: #002d62;
+            text-align: center;
+        }
+        h2 {
+            color: #ff4444;
+            margin-bottom: 20px;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .emergency-button {
+            background: #ff4444;
+            color: #ffffff;
+        }
+        .emergency-button:hover {
+            background: #cc0000;
+        }
+        nav {
+            margin-top: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            background-color: #004080;
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin: 5px;
+        }
+        nav a:hover {
+            background-color: #003060;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ translate('emergency_panel') }}</h2>
+        <button class="emergency-button" onclick="alert('{{ translate('emergency_alert_call') }}')">{{ translate('emergency_call') }}</button>
+        <button class="emergency-button" onclick="alert('{{ translate('emergency_alert_sms') }}')">{{ translate('emergency_sms') }}</button>
+        <button class="emergency-button" onclick="alert('{{ translate('emergency_alert_email') }}')">{{ translate('emergency_email') }}</button>
+        <button class="emergency-button" onclick="alert('{{ translate('emergency_alert_push') }}')">{{ translate('emergency_push') }}</button>
+
+        <nav>
+            <a href="/">{{ translate('emergency_home') }}</a>
+        </nav>
+    </div>
+</body>
+</html>
+
+
+

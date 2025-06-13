@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ana Sayfa</title>
+    <style>
+     body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1565c0; /* Giriş sayfasına uygun sade mavi */
+    height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+
+
+        .title {
+            position: absolute;
+            top: 5%;
+            font-size: 2.5rem;
+            color: #ff4444;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .health-tip {
+            position: absolute;
+            top: 18%;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            background-color: rgba(0, 128, 128, 0.5); /* Su yeşili */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            max-width: 80%;
+            font-size: 1.2rem;
+            animation: pulse 1.5s infinite; /* Pulse animasyonu */
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 0 10px rgba(0, 128, 128, 0.5), 0 0 20px rgba(0, 128, 128, 0.5);
+            }
+            50% {
+                transform: translateX(-50%) scale(1.1);
+                box-shadow: 0 0 20px rgba(0, 128, 128, 0.7), 0 0 30px rgba(0, 128, 128, 0.7);
+            }
+        }
+
+        .menu {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .menu-item {
+            position: absolute;
+            text-align: center;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: rgba(255, 0, 0, 0.7); /* Şeffaf kırmızı */
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse 1.5s infinite;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        .menu-item:nth-child(1) {
+            top: 30%;
+            left: 15%;
+        }
+
+        .menu-item:nth-child(2) {
+            top: 30%;
+            right: 15%;
+        }
+
+        .menu-item:nth-child(3) {
+            bottom: 55%;
+            left: 10%;
+        }
+
+        .menu-item:nth-child(4) {
+            bottom: 55%;
+            right: 10%;
+        }
+
+        .menu-item:nth-child(5) {
+            bottom: 25%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .menu-item:nth-child(6) {
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .menu-item:nth-child(7) {
+            top: 15%; /* Profil ve Ayarlar görünür bir yere taşındı */
+            left: 10%;
+        }
+
+        .menu-item:nth-child(8) {
+            top: 15%; /* Hasta Paneli görünür bir yere taşındı */
+            right: 10%;
+        }
+
+        .time {
+            position: absolute;
+            top: 5%;
+            right: 5%;
+            font-size: 1.5rem;
+            color: #ff4444;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        footer {
+            position: absolute;
+            bottom: 2%;
+            width: 100%;
+            text-align: center;
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        footer a {
+            color: #1565c0;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+ <body>
+    <h1 class="title">{{ translate('saglik_onceligi_sistemi') }}</h1>
+    <div class="health-tip" id="healthTip">{{ translate('saglik_onerileri_yukleniyor') }}</div>
+    <div class="time" id="time"></div>
+    <div class="menu">
+        <div class="menu">
+            <a href="{{ url_for('acil_durum_sayfasi') }}" class="menu-item">{{ translate('acil_durum') }}</a>
+            <a href="{{ url_for('hatirlaticilar') }}" class="menu-item">{{ translate('hatirlaticilar') }}</a>
+            <a href="{{ url_for('hakkimizda') }}" class="menu-item">{{ translate('hakkimizda') }}</a>
+            <a href="{{ url_for('grafikler') }}" class="menu-item">{{ translate('grafikler') }}</a>
+            <a href="{{ url_for('saglik_onerileri') }}" class="menu-item">{{ translate('saglik_onerileri') }}</a>
+            <a href="{{ url_for('geri_bildirim') }}" class="menu-item">{{ translate('geri_bildirim') }}</a>
+            <a href="{{ url_for('profil') }}" class="menu-item">{{ translate('profil') }}</a>
+            <a href="{{ url_for('ayarlar') }}" class="menu-item">{{ translate('ayarlar') }}</a>
+            <a href="{{ url_for('hasta_paneli') }}" class="menu-item">{{ translate('hasta_paneli') }}</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 {{ translate('saglik_onceligi_sistemi') }}. {{ translate('tum_haklari_saklidir') }}</p>
+        <a href="/gizlilik.html">{{ translate('gizlilik_sozlesmesi') }}</a> |
+        <a href="/aydinlatma.html">{{ translate('aydinlatma_metni') }}</a>
+    </footer>
+
+    <script>
+        // Sağlık önerileri listesini kontrol et
+        const healthTips = {{ health_tips | tojson }};
+        console.log("Sağlık Önerileri:", healthTips); // Test için log ekledik
+
+        // Günlük sağlık önerisini göster
+        const healthTipElement = document.getElementById("healthTip");
+        if (healthTips.length > 0) {
+            const randomTip = healthTips[Math.floor(Math.random() * healthTips.length)];
+            healthTipElement.textContent = randomTip;
+        } else {
+            healthTipElement.textContent = "Sağlık önerisi bulunamadı.";
+        }
+
+        // Saat ve tarih kısmı
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString();
+            const dateString = now.toLocaleDateString();
+            document.getElementById("time").textContent = `${dateString} - ${timeString}`;
+        }
+
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+</body>
+

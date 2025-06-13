@@ -1,0 +1,5 @@
+[
+    { "hasta": "Hasta X", "tedavi": "Kalp Ameliyatı", "tarih": "2025-02-15", "doktor": "Dr. Ahmet", "hastane": "İstanbul Eğitim Hastanesi" },
+    { "hasta": "Hasta Y", "tedavi": "Fizik Tedavi", "tarih": "2025-02-14", "doktor": "Dr. Mehmet", "hastane": "Ankara Şehir Hastanesi" },
+    { "hasta": "Hasta Z", "tedavi": "Aşı Uygulaması", "tarih": "2025-02-13", "doktor": "Dr. Zeynep", "hastane": "İzmir Katip Çelebi Üniversitesi Hastanesi" }
+]

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Ayarları</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1565c0; /* Arka plan mavi */
+            color: white;
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Yatay ortalama */
+            align-items: center; /* Dikey ortalama */
+            height: 100vh;
+        }
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: #ffffff;
+            color: #002d62;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            color: #ff4444; /* Başlık kırmızı */
+            text-align: center;
+        }
+        input, button {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #004080;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #ff4444; /* Buton rengi kırmızı */
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ translate('profil_ayarları') }}</h1> <!-- 'profil_ayarları' JSON'dan çevrilecek -->
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <label for="profilePicture">{{ translate('profil_fotografi') }}:</label> <!-- Profil_Fotografi -->
+            <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+
+            <label for="userName">{{ translate('ad_soyad') }}:</label> <!-- Ad_Soyad -->
+            <input type="text" id="userName" name="userName" placeholder="{{ translate('ad soyad placeholder') }}"> <!-- Placeholder da çevrilecek -->
+
+            <button type="submit">{{ translate('kaydet') }}</button> <!-- Kaydet butonu -->
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yeni Rapor Ekle</title>
+    <style>
+        /* Genel Sayfa Tasarımı */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d0ebff; /* Açık mavi arka plan */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Konteyner tasarımı */
+        .container {
+            width: 90%;
+            max-width: 700px; /* Sayfa genişliği artırıldı */
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #0077b5;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Buton Tasarımı */
+        button {
+            background: #27ae60;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>📄 Yeni Rapor Ekle</h2>
+        <form method="POST" action="/rapor_kaydet">
+            <input type="text" name="baslik" placeholder="Rapor Başlığı" required>
+            <textarea name="icerik" rows="5" placeholder="Rapor İçeriği" required></textarea>
+            <button type="submit">Kaydet</button>
+        </form>
+    </div>
+
+</body>
+</html>
+
