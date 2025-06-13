@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Aylık Hasta İstatistikleri</title>
+    <style>
+        /* Açık mavi arka plan */
+        body {
+            background-color: #dfefff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* İçerik kutusu */
+        .container {
+            max-width: 950px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        /* Başlık stilleri */
+        h1 {
+            color: #007BFF;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        /* Açıklama */
+        p {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Tablo stilleri */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 14px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #d0ebff;
+        }
+
+        /* Butonlar */
+        .btn {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            margin-top: 20px;
+        }
+
+        .btn-back {
+            background-color: #28a745;
+        }
+
+        .btn-back:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📊 Aylık Hasta İstatistikleri</h1>
+        <p>Bu sayfada hastaların aylık istatistiklerini inceleyebilir, acil ve poliklinik hasta sayılarını karşılaştırabilirsiniz.</p>
+
+        <table>
+            <tr>
+                <th>📅 Ay</th>
+                <th>👥 Toplam Hasta</th>
+                <th>🚨 Acil Hastalar</th>
+                <th>🏥 Poliklinik Hastaları</th>
+            </tr>
+            {% for ist in istatistikler %}
+            <tr>
+                <td>{{ ist.ay }}</td>
+                <td>{{ ist.toplam_hasta }}</td>
+                <td>{{ ist.acil_hasta }}</td>
+                <td>{{ ist.poliklinik_hasta }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <br>
+        <a href="{{ url_for('hastane_yonetimi') }}" class="btn btn-back">🔙 Geri Dön</a>
+    </div>
+
+</body>
+</html>

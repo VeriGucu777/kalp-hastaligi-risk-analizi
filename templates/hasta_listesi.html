@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasta Listesi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="text-center">🏥 Hasta Listesi</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <table class="table table-striped shadow mt-4">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Adı</th>
+                    <th>Yaş</th>
+                    <th>Cinsiyet</th>
+                    <th>Teşhis</th>
+                    <th>Tedavi Durumu</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.id }}</td>
+                    <td>{{ patient.name }}</td>
+                    <td>{{ patient.age }}</td>
+                    <td>{{ patient.gender }}</td>
+                    <td>{{ patient.diagnosis }}</td>
+                    <td>{{ patient.treatment_status }}</td>
+                    <td>
+                        <a href="{{ url_for('hasta_detay', hasta_id=patient.id) }}" class="btn btn-primary btn-sm">📋 Detaylar</a>
+                        <a href="{{ url_for('edit_patient', patient_id=patient.id) }}" class="btn btn-warning btn-sm">✏ Düzenle</a>
+                        <form action="{{ url_for('delete_patient', patient_id=patient.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Bu hastayı silmek istediğinizden emin misiniz?')">
+                            <button type="submit" class="btn btn-danger btn-sm">🗑 Sil</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="/" class="btn btn-success">🏠 Ana Sayfa</a>
+    </div>
+</body>
+</html>

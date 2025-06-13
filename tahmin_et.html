@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahmin Sonucu</title>
+    <style>
+        .sonuc-container {
+            text-align: center;
+            max-width: 400px;  /* ⚠️ Tabloyu küçülttüm */
+            margin: auto;
+            padding: 10px;
+            border: 2px solid #000;
+            border-radius: 10px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 Tahmin Sonucu</h1>
+
+    <div class="sonuc-container">
+        {% if tahmin_sonucu %}
+            <h2>📢 Tahmin Sonucu: {{ tahmin_sonucu }}</h2>
+            <p>📌 Düşük Öncelik Olasılığı: {{ dusuk_oncelik }}%</p>
+            <p>📌 Yüksek Öncelik Olasılığı: {{ yuksek_oncelik }}%</p>
+            
+            <!-- 📄 PDF indirme butonu -->
+            <a class="btn" href="/indir-pdf">📄 PDF'yi İndir</a>
+        {% else %}
+            <h2>⚠️ Henüz bir tahmin yapılmadı.</h2>
+        {% endif %}
+    </div>
+
+    <br>
+    <a href="/hastalar">↩ Geri Dön</a>
+</body>
+</html>
+

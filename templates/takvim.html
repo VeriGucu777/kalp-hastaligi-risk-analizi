@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📅 Takvim</title>
+    <style>
+        /* Açık mavi arka plan */
+        body {
+            background-color: #dfefff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* İçerik kutusu */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: left;
+        }
+
+        /* Başlık stilleri */
+        h1 {
+            color: #007BFF;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #0056b3;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        /* Genel metin rengi */
+        p {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Takvim çerçevesi */
+        .calendar-container {
+            text-align: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f0f8ff;
+            border-radius: 10px;
+            border-left: 6px solid #007BFF;
+        }
+
+        /* Butonlar */
+        .btn {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #007BFF;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-back {
+            background-color: #28a745;
+            padding: 14px 22px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .btn-back:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📅 Takvim</h1>
+        <p>Önemli tarihleri ve hatırlatmaları buraya ekleyebilirsiniz.</p>
+
+        <div class="calendar-container">
+            <h2>📆 Planlı Randevular ve Önemli Günler</h2>
+            <iframe src="https://calendar.google.com/calendar/embed?src=tr.turkish%23holiday%40group.v.calendar.google.com&ctz=Europe/Istanbul" 
+                style="border: 0; width: 100%; height: 400px;">
+            </iframe>
+        </div>
+
+        <br>
+        <a href="{{ url_for('zaman_yonetimi') }}" class="btn btn-back">🔙 Geri Dön</a>
+    </div>
+
+</body>
+</html>
+

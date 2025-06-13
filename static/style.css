@@ -1,0 +1,89 @@
+/* Arka plan resmini ekleyelim */
+body {
+    font-family: Arial, sans-serif;
+background: url("/static/videos/background.jpg") no-repeat center center fixed;
+       background-size: cover;
+    display: flex;
+    justify-content: flex-start; /* Sol kenara yaslamak için */
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding-left: 30px; /* Sol tarafa daha da yakın olsun */
+}
+
+/* Giriş paneli */
+.login-container {
+    background: rgba(255, 255, 255, 0.2); /* Daha fazla şeffaflık ekledik */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Dar hale getirdik */
+    text-align: left; /* İçeriği sola yasladık */
+}
+
+/* Başlık - Welcome */
+h1.welcome-text {
+    color: red; /* Kırmızı renk */
+    font-size: 24px;
+    animation: fadeIn 2s infinite alternate;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+/* Butonları daralt */
+button {
+    width: 80%; /* Daraltılmış buton */
+    padding: 5px;
+    margin-top: 10px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* Input alanları */
+input, select {
+    width: 100%;
+    padding: 6px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Gizlilik sözleşmesi kutucuğu */
+.info-text {
+    font-size: 12px;
+    margin-top: 10px;
+}
+
+/* Hata mesajı */
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+/* Şifremi Unuttum ve Kayıt Ol Linkleri */
+.extra-links {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.extra-links a {
+    color: #007BFF;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.extra-links a:hover {
+    text-decoration: underline;
+}
+
+

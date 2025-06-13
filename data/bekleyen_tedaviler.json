@@ -1,0 +1,5 @@
+[
+    { "hasta": "Hasta A", "tedavi": "MR Çekimi", "tarih": "2025-02-20", "doktor": "Dr. Cem", "hastane": "İstanbul Eğitim Hastanesi" },
+    { "hasta": "Hasta B", "tedavi": "Fizik Tedavi", "tarih": "2025-02-19", "doktor": "Dr. Ayşe", "hastane": "Ankara Şehir Hastanesi" },
+    { "hasta": "Hasta C", "tedavi": "Kan Tahlili", "tarih": "2025-02-18", "doktor": "Dr. Hasan", "hastane": "İzmir Katip Çelebi Üniversitesi Hastanesi" }
+]

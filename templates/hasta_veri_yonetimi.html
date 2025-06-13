@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Hasta Veri Yönetimi</title>
+    <style>
+        /* Açık mavi arka plan */
+        body {
+            background-color: #dfefff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* İçerik kutusu */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: left;
+        }
+
+        /* Başlık stilleri */
+        h1 {
+            color: #007BFF;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        h2 {
+            color: #0056b3;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        /* Genel metin rengi */
+        p {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Bölüm (section) kutusu */
+        .section {
+            background: #f0f8ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 6px solid #007BFF;
+        }
+
+        /* Liste stilleri */
+        .section ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+        .section ul li {
+            font-size: 16px;
+            padding: 8px 0;
+        }
+
+        /* Butonlar */
+        .btn {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+        .btn-primary {
+            background-color: #007BFF;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-back {
+            background-color: #28a745;
+            padding: 14px 22px;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .btn-back:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📊 Hasta Veri Yönetimi</h1>
+        <p>Hasta veri yönetimi, hasta kayıtları, sağlık geçmişi ve hastane süreçlerinin dijital ortamda güvenli bir şekilde yönetilmesini sağlar.</p>
+
+        <div class="section">
+            <h2>📌 1. Hasta Kayıt ve Bilgi Yönetimi</h2>
+            <ul>
+                <li>📋 Hastaların kimlik, sağlık geçmişi ve sigorta bilgilerinin dijital kaydı</li>
+                <li>🔐 Hasta bilgilerine erişim yetkilerinin düzenlenmesi</li>
+                <li>📄 Elektronik sağlık kayıtlarının (EHR) saklanması</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🩺 2. Hasta Takibi ve Sağlık Durumu</h2>
+            <ul>
+                <li>🩸 Laboratuvar test sonuçlarının saklanması</li>
+                <li>💊 Tedavi planlarının sistemde güncellenmesi</li>
+                <li>📅 Hastaların randevu geçmişi ve takip süreçleri</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>⚕️ 3. Veri Güvenliği ve Hasta Mahremiyeti</h2>
+            <ul>
+                <li>🔒 Veri güvenliği standartlarına uygun hasta bilgisi saklama</li>
+                <li>📢 Sağlık çalışanlarının yetkilendirme seviyelerinin belirlenmesi</li>
+                <li>📑 Hasta verilerinin yasal düzenlemelere uygun saklanması</li>
+            </ul>
+        </div>
+
+        <br>
+        <a href="{{ url_for('egitim') }}" class="btn btn-back">🔙 Geri Dön</a>
+    </div>
+
+</body>
+</html>
+
+

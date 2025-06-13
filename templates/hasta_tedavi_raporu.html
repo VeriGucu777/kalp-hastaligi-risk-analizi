@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📄 Hasta Tedavi Raporu</title>
+    <style>
+        /* Açık mavi arka plan */
+        body {
+            background-color: #dfefff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* İçerik kutusu */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: left;
+        }
+
+        /* Başlık stilleri */
+        h1 {
+            color: #007BFF;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Rapor içeriği */
+        .report-details {
+            background: #f0f8ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border-left: 6px solid #007BFF;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Butonlar */
+        .btn {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            text-align: center;
+            margin: 10px;
+        }
+        .btn-primary {
+            background-color: #007BFF;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #28a745;
+        }
+        .btn-secondary:hover {
+            background-color: #218838;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📄 Hasta Tedavi Raporu</h1>
+
+        <div class="report-details">
+            <p><strong>👤 Hasta Adı:</strong> {{ rapor.hasta_adi }}</p>
+            <p><strong>📅 Tarih:</strong> {{ rapor.tarih }}</p>
+            <p><strong>📄 Rapor İçeriği:</strong> {{ rapor.icerik }}</p>
+        </div>
+
+        <br>
+        <a href="{{ url_for('hasta_tedavi_raporu') }}" class="btn btn-secondary">🔙 Geri Dön</a>
+        <a href="{{ url_for('rapor_indir', rapor_id=rapor.id) }}" class="btn btn-primary">📥 Raporu PDF İndir</a>
+        <a href="{{ url_for('rapor_sil', rapor_id=rapor.id) }}" class="btn btn-danger" onclick="return confirm('Bu raporu silmek istediğinizden emin misiniz?');">🗑 Raporu Sil</a>
+    </div>
+
+</body>
+</html>
+

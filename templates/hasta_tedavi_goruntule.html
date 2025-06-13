@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📂 Hasta Tedavi Raporu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-color: #dfefff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007BFF;
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin-top: 15px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-back {
+            background-color: #28a745;
+        }
+        .btn-back:hover {
+            background-color: #218838;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📂 Hasta Tedavi Raporu</h1>
+        <p><strong>Hasta Adı:</strong> {{ rapor.hasta_adi }}</p>
+        <p><strong>Tarih:</strong> {{ rapor.tarih }}</p>
+        <p><strong>Rapor İçeriği:</strong></p>
+        <p>{{ rapor.icerik }}</p>
+
+        <br>
+        <a href="{{ url_for('hasta_tedavi_raporu') }}" class="btn btn-back">🔙 Geri Dön</a>
+        <form action="{{ url_for('rapor_sil', rapor_id=rapor.id) }}" method="POST" onsubmit="return confirm('Bu raporu silmek istediğinizden emin misiniz?');">
+            <button type="submit" class="btn btn-danger">🗑 Raporu Sil</button>
+        </form>
+    </div>
+
+</body>
+</html>
+

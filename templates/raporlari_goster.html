@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 Hastane Raporları</title>
+    <style>
+        /* Açık mavi arka plan */
+        body {
+            background-color: #dfefff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+        }
+
+        /* İçerik kutusu */
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: left;
+        }
+
+        /* Başlık */
+        h1 {
+            color: #007BFF;
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* Açıklama metni */
+        p {
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+        }
+
+        /* Rapor listesi */
+        .report-list {
+            text-align: left;
+            margin-top: 20px;
+            padding: 0;
+            list-style: none;
+        }
+
+        /* Rapor listesi elemanları */
+        .report-list li {
+            background: #f0f8ff;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 10px;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 6px solid #007BFF;
+        }
+
+        /* Butonlar */
+        .btn {
+            display: inline-block;
+            padding: 14px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            color: white;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: #007BFF;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        .btn-back {
+            background-color: #28a745;
+        }
+        .btn-back:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📊 Hastane Raporları</h1>
+        <p>Bu sayfada sistemde kayıtlı hastane raporlarını görüntüleyebilir ve yönetebilirsiniz.</p>
+
+        <ul class="report-list">
+            {% for rapor in raporlar %}
+                <li>
+                    <span>📌 {{ rapor.ad }}</span>
+                    <div>
+                        <a href="{{ url_for('rapor_detay', rapor_id=rapor.id) }}" class="btn btn-primary">📂 Görüntüle</a>
+                        <a href="{{ url_for('rapor_sil', rapor_id=rapor.id) }}" class="btn btn-danger" onclick="return confirm('Bu raporu silmek istediğinizden emin misiniz?');">🗑 Sil</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <br>
+        <a href="{{ url_for('hastane_yonetimi') }}" class="btn btn-back">🔙 Geri Dön</a>
+    </div>
+
+</body>
+</html>
+

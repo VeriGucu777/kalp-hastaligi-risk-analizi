@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boş Yoğun Bakım Yatakları</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #ADD8E6; } /* Açık mavi arka plan */
+        h2 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th { background-color: #4CAF50; color: white; }
+        .bos { background-color: #90EE90; }
+        .dolu { background-color: #FF6347; color: white; }
+        button { padding: 10px 15px; font-size: 16px; border: none; cursor: pointer; }
+        .rezerve { background-color: #FFA500; color: white; border-radius: 5px; }
+        .rezerve:hover { background-color: #FF8C00; }
+    </style>
+    <script>
+        async function fetchYatakDurumu() {
+            try {
+                const response = await fetch('/data/yatak_durumu.json');
+
+                if (!response.ok) {
+                    throw new Error('JSON dosyası yüklenemedi');
+                }
+                const data = await response.json();
+                const table = document.getElementById('yatakTable');
+                
+                table.innerHTML = `<tr>
+                    <th>Yatak Numarası</th>
+                    <th>Durum</th>
+                    <th>İşlem</th>
+                </tr>`;
+    
+                data.forEach(yatak => {
+                    let row = document.createElement('tr');
+                    row.className = yatak.durum === 'Boş' ? 'bos' : 'dolu';
+                    row.innerHTML = `
+                        <td>${yatak.numara}</td>
+                        <td>${yatak.durum}</td>
+                        <td>
+                            ${yatak.durum === 'Boş' ? `<button class="rezerve" onclick="rezerveEt('${yatak.numara}')">Rezerve Et</button>` : '<span>Mevcut Değil</span>'}
+                        </td>
+                    `;
+                    table.appendChild(row);
+                });
+            } catch (error) {
+                console.error("Hata:", error);
+            }
+        }
+
+        function rezerveEt(yatakNumarasi) {
+            alert(`Yatak ${yatakNumarasi} rezerve edildi!`);
+        }
+        
+        document.addEventListener('DOMContentLoaded', fetchYatakDurumu);
+    </script>
+</head>
+<body>
+    <h2>Hastane Yoğun Bakım Yatak Durumu</h2>
+    <table id="yatakTable">
+        <tr>
+            <th>Yatak Numarası</th>
+            <th>Durum</th>
+            <th>İşlem</th>
+        </tr>
+    </table>
+</body>
+</html>
+

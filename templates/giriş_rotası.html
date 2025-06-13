@@ -1,0 +1,42 @@
+@app.route("/giris", methods=["GET", "POST"])
+def giris():
+    error = None
+    users = load_users()
+
+    if request.method == "POST":
+        email = request.form.get("email", "").strip().lower()
+        password = request.form.get("password", "").strip()
+        role = request.form.get("role", "").strip().lower().replace("ı", "i")  # Türkçe karakter dönüşümü
+
+        print(f"🛠 Giriş yapan kullanıcı: {email}, Role: {role}")  # Debugging için
+
+        # **Eşleşen kullanıcıları bul**
+        matched_users = [u for u in users if u["email"] == email and u["password"] == password]
+
+        if not matched_users:
+            error = "Hatalı giriş bilgileri! Lütfen tekrar deneyin."
+            return render_template("giris.html", error=error)
+
+        # **Doğru rolü olan kullanıcıyı bul**
+        user = next((u for u in matched_users if u["role"].strip().lower().replace("ı", "i") == role), None)
+
+        if not user:
+            error = "Yanlış rol seçimi! Lütfen doğru rolü seçin."
+            print(f"❌ Yanlış rol seçildi! Kayıtlı roller: {[u['role'] for u in matched_users]}, Seçilen rol: {role}")
+            return render_template("giris.html", error=error)
+
+        # **Başarılı giriş**
+        session['logged_in'] = True
+        session['email'] = user["email"]
+        session['role'] = user["role"]
+        session['ad'] = user["ad"]
+
+        print(f"✅ Başarılı giriş: {email}, Rol: {user['role']}")
+
+        # **Giriş sonrası yönlendirme**
+        if user["role"] == "hasta":
+            return redirect(url_for("ana_sayfa"))
+        elif user["role"] == "saglik_calisani":
+            return redirect(url_for("saglik_calisani"))
+
+    return render_template("giris.html", error=error)

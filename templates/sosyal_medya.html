@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sosyal Medya Bağlantıları</title>
+    <style>
+        /* Genel Stil */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #d0ebff; /* Açık Mavi Arka Plan */
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .btn {
+            display: block;
+            padding: 12px;
+            text-decoration: none;
+            color: white;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+        }
+
+        /* Buton Renkleri */
+        .btn-facebook { background-color: #3b5998; }
+        .btn-twitter { background-color: #1da1f2; }
+        .btn-instagram { background-color: #e4405f; }
+        .btn-linkedin { background-color: #0077b5; }
+
+        /* Hover (Üzerine Gelince) Efektleri */
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bizi Sosyal Medyada Takip Edin!</h1>
+        <div class="social-buttons">
+            <a href="https://www.facebook.com/" class="btn btn-facebook" target="_blank">Facebook</a>
+            <a href="https://twitter.com/" class="btn btn-twitter" target="_blank">Twitter</a>
+            <a href="https://www.instagram.com/" class="btn btn-instagram" target="_blank">Instagram</a>
+            <a href="https://www.linkedin.com/" class="btn btn-linkedin" target="_blank">LinkedIn</a>
+        </div>
+    </div>
+</body>
+</html>
+

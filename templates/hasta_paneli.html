@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ translate('hasta_paneli') }}</title> <!-- Başlık çeviri desteği -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1565c0; /* Mavi arka plan */
+            color: #ff0000; /* Kırmızı yazı rengi */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #ffffff; /* Beyaz arka plan */
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #ff4444; /* Kırmızı başlık rengi */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #ff0000; /* Kırmızı etiket rengi */
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ff0000; /* Kırmızı kenar */
+            border-radius: 5px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.8); /* Şeffaf arka plan */
+            color: #333;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #ff4444;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background: #ff4444; /* Kırmızı buton */
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #ff0000;
+            transform: scale(1.05);
+        }
+
+        table {
+            width: 100%;
+            margin: 15px auto;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        table, th, td {
+            border: 1px solid #ff0000; /* Kırmızı tablo kenarları */
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+            color: #ff0000; /* Kırmızı tablo yazı rengi */
+        }
+
+        th {
+            background: rgba(255, 0, 0, 0.7); /* Kırmızı başlık arka planı */
+        }
+
+        .alert {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #ffcccc; /* Pembe uyarı rengi */
+            color: #800000; /* Koyu kırmızı */
+            font-size: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>{{ translate('hasta_paneli') }}</h2>
+
+        <form id="hastaForm">
+            <div class="form-group">
+                <label for="hastaAdi">{{ translate('hasta_adi') }}:</label>
+                <input type="text" id="hastaAdi" placeholder="{{ translate('hasta_adi_placeholder') }}">
+            </div>
+            <div class="form-group">
+                <label for="yas">{{ translate('yas') }}:</label>
+                <input type="number" id="yas" placeholder="{{ translate('yas_placeholder') }}">
+            </div>
+            <div class="form-group">
+                <label for="cinsiyet">{{ translate('cinsiyet') }}:</label>
+                <select id="cinsiyet">
+                    <option value="Erkek">{{ translate('erkek') }}</option>
+                    <option value="Kadın">{{ translate('kadin') }}</option>
+                    <option value="Diğer">{{ translate('diger') }}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nabiz">{{ translate('nabiz') }}:</label>
+                <input type="number" id="nabiz" placeholder="{{ translate('nabiz_placeholder') }}">
+            </div>
+            <div class="form-group">
+                <label for="sistolik">{{ translate('tansiyon_sistolik') }}:</label>
+                <input type="number" id="sistolik" placeholder="{{ translate('tansiyon_sistolik_placeholder') }}">
+            </div>
+            <div class="form-group">
+                <label for="diastolik">{{ translate('tansiyon_diastolik') }}:</label>
+                <input type="number" id="diastolik" placeholder="{{ translate('tansiyon_diastolik_placeholder') }}">
+            </div>
+            <div class="form-group">
+                <label for="kanSekeri">{{ translate('kan_sekeri') }}:</label>
+                <input type="number" id="kanSekeri" placeholder="{{ translate('kan_sekeri_placeholder') }}">
+            </div>
+            <button type="button" onclick="kaydet()">{{ translate('kaydet') }}</button>
+        </form>
+
+        <div class="alert" id="alertBox"></div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ translate('ad') }}</th>
+                    <th>{{ translate('yas') }}</th>
+                    <th>{{ translate('cinsiyet') }}</th>
+                    <th>{{ translate('nabiz') }}</th>
+                    <th>{{ translate('tansiyon_sistolik') }}</th>
+                    <th>{{ translate('tansiyon_diastolik') }}</th>
+                    <th>{{ translate('kan_sekeri') }}</th>
+                </tr>
+            </thead>
+            <tbody id="hastaListesi"></tbody>
+        </table>
+    </div>
+
+    <script>
+        function kaydet() {
+            const hastaAdi = document.getElementById('hastaAdi').value;
+            const yas = document.getElementById('yas').value;
+            const cinsiyet = document.getElementById('cinsiyet').value;
+            const nabiz = document.getElementById('nabiz').value;
+            const sistolik = document.getElementById('sistolik').value;
+            const diastolik = document.getElementById('diastolik').value;
+            const kanSekeri = document.getElementById('kanSekeri').value;
+
+            const hastaListesi = document.getElementById('hastaListesi');
+            hastaListesi.innerHTML += `
+                <tr>
+                    <td>${hastaAdi}</td>
+                    <td>${yas}</td>
+                    <td>${cinsiyet}</td>
+                    <td>${nabiz}</td>
+                    <td>${sistolik}</td>
+                    <td>${diastolik}</td>
+                    <td>${kanSekeri}</td>
+                </tr>
+            `;
+        }
+    </script>
+</body>
+</html>
+
+
+

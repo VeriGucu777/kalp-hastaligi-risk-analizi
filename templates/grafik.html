@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafikler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0D47A1; /* Yoğun mavi arka plan */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            color: #FFFFFF; /* Beyaz metin */
+        }
+
+        .container {
+            max-width: 900px;
+            width: 90%;
+            background: #FFFFFF;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            color: #0D47A1; /* Koyu mavi metin */
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #0D47A1;
+            margin-bottom: 20px;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .gallery img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #90CAF9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Grafikler</h1>
+        <div class="gallery">
+            <img src="../static/images/agri_seviyesi_dagilimi.png" alt="Ağrı Seviyesi Dağılımı">
+            <img src="../static/images/bmi_dagilimi.png" alt="BMI Dağılımı">
+            <img src="../static/images/cinsiyet_dagilimi.png" alt="Cinsiyet Dağılımı">
+            <img src="../static/images/ekip_kapasitesi_dagilimi.png" alt="Ekip Kapasitesi Dağılımı">
+            <img src="../static/images/kalp_hastaligi_dagilimi.png" alt="Kalp Hastalığı Dağılımı">
+            <img src="../static/images/oksijen_doygunlugu_dagilimi.png" alt="Oksijen Doygunluğu Dağılımı">
+            <img src="../static/images/stres_seviyesi_dagilimi.png" alt="Stres Seviyesi Dağılımı">
+            <img src="../static/images/tansiyon_diastolik_dagilimi.png" alt="Tansiyon Diastolik Dağılımı">
+            <img src="../static/images/tedavi_suresi_dagilimi.png" alt="Tedavi Süresi Dağılımı">
+            <img src="../static/images/yas_dagilimi.png" alt="Yaş Dağılımı">
+            <img src="../static/images/kanser_dagilimi.png" alt="Kanser Dağılımı">
+            <img src="../static/images/nabiz_dagilimi.png" alt="Nabız Dağılımı">
+            <img src="../static/images/tansiyon_sistolik_dagilimi.png" alt="Tansiyon Sistolik Dağılımı">
+        </div>
+        <footer>© 2025 Sağlık Önceliği Sistemi. Tüm Hakları Saklıdır.</footer>
+    </div>
+</body>
+</html>
+
+
+
+

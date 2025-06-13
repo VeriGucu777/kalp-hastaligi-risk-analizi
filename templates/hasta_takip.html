@@ -1,0 +1,182 @@
+     <!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasta Takip ve Veri Yönetimi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+     <!-- 🔔 Bildirim Zili -->
+    <div class="container mt-3 text-end">
+        <a href="{{ url_for('bildirimler') }}" class="btn btn-light position-relative">
+            🔔
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ unread_notifications_count }}
+            </span>
+        </a>
+     </div>
+    <div class="container mt-5">
+    <h2 class="text-center mb-4">🏥 Hasta Takip ve Veri Yönetimi</h2>
+    <style>
+    body {
+        background-color: #add8e6 !important; /* Açık mavi */
+    }
+</style>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- 📌 Hasta Ekleme Formu -->
+        <div class="card p-4 shadow mb-4">
+            <h4 class="mb-3">➕ Yeni Hasta Ekle</h4>
+            <form action="/hasta_ekle" method="post">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Hasta Adı:</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="age" class="form-label">Yaş:</label>
+                    <input type="number" class="form-control" id="age" name="age" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="gender" class="form-label">Cinsiyet:</label>
+                    <select class="form-control" id="gender" name="gender">
+                        <option value="Erkek">Erkek</option>
+                        <option value="Kadın">Kadın</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="diagnosis" class="form-label">Teşhis:</label>
+                    <input type="text" class="form-control" id="diagnosis" name="diagnosis" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="treatment_status" class="form-label">Tedavi Durumu:</label>
+                    <select class="form-control" id="treatment_status" name="treatment_status">
+                        <option value="Devam Ediyor">Devam Ediyor</option>
+                        <option value="Tamamlandı">Tamamlandı</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-success w-100">✅ Hasta Ekle</button>
+                </form>
+                </div>
+                <div class="text-center mt-4">
+                     <a href="{{ url_for('oncelik_karsilastirma') }}" class="btn btn-warning btn-lg">
+                          ⚖ Hasta Öncelik Karşılaştır
+                     </a>
+                </div>
+
+        <!-- 📌 Hasta Listesi -->
+        <h4 class="mb-3">📋 Mevcut Hastalar</h4>
+        <table class="table table-striped shadow">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Adı</th>
+                    <th>Yaş</th>
+                    <th>Cinsiyet</th>
+                    <th>Teşhis</th>
+                    <th>Tedavi Durumu</th>
+                    <th>Kayıt Tarihi</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for patient in patients %}
+                <tr>
+                    <td>{{ patient.id }}</td>
+                    <td>{{ patient.name }}</td>
+                    <td>{{ patient.age }}</td>
+                    <td>{{ patient.gender }}</td>
+                    <td>{{ patient.diagnosis }}</td>
+                    <td>{{ patient.treatment_status }}</td>
+                    <td>{{ patient.kayit_tarihi.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    <td>
+                       <!-- Güncelle Butonu -->
+<a href="{{ url_for('hasta_guncelle', patient_id=patient.id) }}" class="btn btn-warning btn-sm">✏ Güncelle</a>
+<!-- Hasta Silme Butonu (POST Methodu ile Güvenli) -->
+<form action="{{ url_for('hasta_sil', patient_id=patient.id) }}" method="POST" style="display:inline;">
+    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Bu hastayı silmek istediğinizden emin misiniz?')">🗑 Sil</button>
+</form>
+<!-- 📌 Tahmin Butonu -->
+<form action="{{ url_for('hasta_tahmin', patient_id=patient.id) }}" method="POST" style="display:inline;">
+    <button type="submit" class="btn btn-info btn-sm">🤖 Tahmin Yap</button>
+</form>
+<!-- PDF İndirme Butonu -->
+<a href="{{ url_for('hasta_raporu_pdf', hasta_id=patient.id) }}" class="btn btn-primary btn-sm">📄 Hasta PDF İndir</a>
+
+                        <a href="{{ url_for('hasta_detay', hasta_id=patient.id) }}" class="btn btn-info btn-sm">🔍 Detayları Gör</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- 📌 Filtreleme Formu -->
+        <div class="card p-4 shadow mb-4">
+            <h4 class="mb-3">🔍 Hastaları Filtrele</h4>
+            <form action="/hasta_takip" method="get">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label for="name" class="form-label">Hasta Adı:</label>
+                        <input type="text" class="form-control" id="name" name="name">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="gender" class="form-label">Cinsiyet:</label>
+                        <select class="form-control" id="gender" name="gender">
+                            <option value="">Tümü</option>
+                            <option value="Erkek">Erkek</option>
+                            <option value="Kadın">Kadın</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="treatment_status" class="form-label">Tedavi Durumu:</label>
+                        <select class="form-control" id="treatment_status" name="treatment_status">
+                            <option value="">Tümü</option>
+                            <option value="Devam Ediyor">Devam Ediyor</option>
+                            <option value="Tamamlandı">Tamamlandı</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-3 mt-2">
+                    <div class="col-md-3">
+                        <label for="start_date" class="form-label">Başlangıç Tarihi:</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="end_date" class="form-label">Bitiş Tarihi:</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date">
+                    </div>
+                    <div class="col-md-3 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">🔍 Filtrele</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- 📌 Grafikleri Görüntüle ve PDF İndir Butonları -->
+        <div class="row g-3 mt-4">
+            <div class="col-md-6 d-flex justify-content-center">
+                <a href="{{ url_for('hasta_verileri_analiz') }}">
+                    <button class="btn btn-info w-100">📊 Grafikleri Görüntüle</button>
+                </a>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center">
+                <a href="{{ url_for('hasta_raporu_pdf', hasta_id=patients[0].id if patients else 1) }}">
+                    <button class="btn btn-success w-100">📥 Hasta Raporunu PDF Olarak İndir</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

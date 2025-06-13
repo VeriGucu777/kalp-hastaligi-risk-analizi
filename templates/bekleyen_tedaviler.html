@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bekleyen Tedaviler</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script>
+        async function fetchBekleyenTedaviler() {
+            try {
+                const response = await fetch('/data/bekleyen_tedaviler.json');
+                if (!response.ok) {
+                    throw new Error('JSON dosyası yüklenemedi');
+                }
+                const data = await response.json();
+                renderTedaviListesi(data);
+            } catch (error) {
+                console.error("Hata:", error);
+                document.getElementById('tedaviListesi').innerHTML = "<p class='text-danger'>⚠ Bekleyen tedaviler yüklenemedi.</p>";
+            }
+        }
+
+        function renderTedaviListesi(tedaviListesi) {
+            const listGroup = document.getElementById('tedaviListesi');
+            listGroup.innerHTML = ''; // Önce listeyi temizle
+
+            if (tedaviListesi.length === 0) {
+                listGroup.innerHTML = "<p class='text-warning text-center'>Şu anda bekleyen tedavi bulunmamaktadır.</p>";
+                return;
+            }
+
+            tedaviListesi.forEach((item, index) => {
+                let tedaviItem = document.createElement('div');
+                tedaviItem.className = "list-group-item d-flex justify-content-between align-items-center";
+                tedaviItem.innerHTML = `
+                    <span>⏳ ${item.hasta} - ${item.tedavi} (${item.tarih}, ${item.doktor}, ${item.hastane})</span>
+                    <button class="btn btn-success btn-sm" onclick="tamamlandi(this, '${item.hasta}')">✔ Tamamlandı</button>
+                `;
+                listGroup.appendChild(tedaviItem);
+            });
+        }
+
+        function tamamlandi(button, hastaAdi) {
+            alert(`✔ ${hastaAdi} tedavisi tamamlandı!`);
+            button.parentElement.remove(); // Butonun bağlı olduğu satırı kaldır
+        }
+
+        function filtrele() {
+            let input = document.getElementById('search').value.toLowerCase();
+            let listItems = document.getElementsByClassName('list-group-item');
+
+            for (let i = 0; i < listItems.length; i++) {
+                let text = listItems[i].textContent.toLowerCase();
+                listItems[i].style.display = text.includes(input) ? "" : "none";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchBekleyenTedaviler);
+    </script>
+    <style>
+        body {
+            background-color: #d0e7ff; /* Açık mavi arka plan */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">⏳ Bekleyen Tedaviler</h2>
+        <p class="text-center text-muted">Bekleyen tedavileri görüntüleyin ve tamamlandığında işaretleyin.</p>
+
+        <!-- Filtreleme Alanı -->
+        <div class="mb-3">
+            <label for="search" class="form-label">Arama Yap:</label>
+            <input type="text" id="search" class="form-control" placeholder="Hasta adı, doktor, hastane veya tedavi girin..." onkeyup="filtrele()">
+        </div>
+
+        <div class="list-group" id="tedaviListesi">
+            <!-- Dinamik Veri Buraya Gelecek -->
+        </div>
+    </div>
+</body>
+</html>
+
+

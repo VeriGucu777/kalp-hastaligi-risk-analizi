@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📋 Planlayıcı</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Açık Mavi Arka Plan */
+        body {
+            background-color: #b3d9ff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Konteyner */
+        .container {
+            max-width: 700px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin: auto;
+            text-align: center;
+        }
+
+        /* Başlık */
+        h1 {
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Form Alanı */
+        .input-group {
+            margin-top: 15px;
+        }
+
+        /* Butonlar */
+        button, .btn {
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover, .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Plan Listesi */
+        .plan-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .list-group-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .delete-btn:hover {
+            background-color: #a71d2a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📋 Planlayıcı</h1>
+        <p>Günlük ve haftalık işlerinizi buradan planlayabilirsiniz.</p>
+
+        <!-- Plan Ekleme Formu -->
+        <div class="input-group">
+            <input type="text" id="planInput" class="form-control" placeholder="Yeni planınızı girin...">
+            <button onclick="addPlan()" class="btn btn-primary">➕ Ekle</button>
+        </div>
+
+        <!-- Plan Listesi -->
+        <ul id="planList" class="list-group plan-list">
+            <!-- Planlar buraya eklenecek -->
+        </ul>
+
+        <br>
+        <a href="{{ url_for('zaman_yonetimi') }}" class="btn btn-secondary">🔙 Geri Dön</a>
+    </div>
+
+    <script>
+        function addPlan() {
+            let planInput = document.getElementById("planInput");
+            let planText = planInput.value.trim();
+            if (planText === "") return;
+
+            let planList = document.getElementById("planList");
+
+            let listItem = document.createElement("li");
+            listItem.className = "list-group-item";
+
+            let textSpan = document.createElement("span");
+            textSpan.textContent = planText;
+
+            let deleteButton = document.createElement("button");
+            deleteButton.textContent = "❌ Sil";
+            deleteButton.className = "delete-btn";
+            deleteButton.onclick = function() {
+                planList.removeChild(listItem);
+            };
+
+            listItem.appendChild(textSpan);
+            listItem.appendChild(deleteButton);
+            planList.appendChild(listItem);
+
+            planInput.value = "";
+        }
+    </script>
+
+</body>
+</html>
+

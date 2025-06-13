@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sağlık Çalışanı Geri Bildirim</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Sayfanın genel tasarımı */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #d0ebff; /* Açık mavi arka plan */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Konteyneri genişlettik ve daha büyük yaptık */
+        .container {
+            width: 90%;
+            max-width: 800px; /* Sayfa genişletildi */
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #0077b5;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Buton tasarımı */
+        .btn-primary {
+            background-color: #0077b5;
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 18px;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>📩 Sağlık Çalışanları İçin Geri Bildirim</h2>
+        <form action="/geri_bildirim_saglikci" method="POST">
+            <div class="form-group">
+                <label for="mesaj">Geri Bildiriminiz:</label>
+                <textarea id="mesaj" name="mesaj" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Gönder</button>
+        </form>
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veri Girişi Formu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #007bff;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .save-btn { background-color: #4caf50; color: white; }
+        .submit-btn { background-color: #007bff; color: white; }
+        .list-btn { background-color: #ff9800; color: white; }
+        .buttons button:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+   <div class="container">
+    <h1>Veri Girişi Formu</h1>
+
+    <h2>Hasta Bilgileri</h2>
+    <form id="tahminForm" method="POST">
+
+
+
+        <label for="isim">İsim:</label>
+        <input type="text" id="isim" name="Isim" required>
+
+        <label for="soyisim">Soyisim:</label>
+        <input type="text" id="soyisim" name="Soyisim" required>
+
+        <label for="kimlik_no">Kimlik No:</label>
+        <input type="text" id="kimlik_no" name="Kimlik_No" required>
+
+<h2>Sağlık Bilgileri</h2>
+<label for="yas">Yaş:</label>
+<input type="number" id="yas" name="Yaş" required>
+
+<label for="cinsiyet">Cinsiyet:</label>
+<select id="cinsiyet" name="Cinsiyet" required>
+    <option value="Kadın">Kadın</option>
+    <option value="Erkek">Erkek</option>
+</select>
+
+<label for="bmi">BMI:</label>
+<input type="number" id="bmi" name="BMI" step="0.1" required>
+
+<label for="nabiz">Nabız:</label>
+<input type="number" id="nabiz" name="Nabız" required>
+
+<label for="tansiyon_sistolik">Tansiyon Sistolik:</label>
+<input type="number" id="tansiyon_sistolik" name="Tansiyon_Sistolik" required>
+
+<label for="tansiyon_diastolik">Tansiyon Diastolik:</label>
+<input type="number" id="tansiyon_diastolik" name="Tansiyon_Diastolik" required>
+<label for="oksijen_doygunlugu">Oksijen Doygunluğu (%):</label>
+<input type="number" id="oksijen_doygunlugu" name="Oksijen_Doygunluğu" required><br>
+
+ <label for="kalp_hastaligi">Kalp Hastalığı:</label>
+ <select id="kalp_hastaligi" name="Kalp_Hastaligi" required>
+     <option value="Evet">Evet</option>
+     <option value="Hayır">Hayır</option>
+</select>
+
+<label for="kanser">Kanser:</label>
+<select id="kanser" name="Kanser" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="tansiyon_problemi">Tansiyon Problemi:</label>
+<select id="tansiyon_problemi" name="Tansiyon_Problemi" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="kolesterol_sorunu">Kolesterol Sorunu:</label>
+<select id="kolesterol_sorunu" name="Kolesterol_Sorunu" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="panik_atak">Panik Atak:</label>
+<select id="panik_atak" name="Panik_Atak" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="son_ameliyat">Son Ameliyat:</label>
+<select id="son_ameliyat" name="Son_Ameliyat" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="kirik">Kırık:</label>
+<select id="kirik" name="Kirik" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+<label for="cikik">Çıkık:</label>
+<select id="cikik" name="Cikik" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="kalp_krizi">Kalp Krizi:</label>
+<select id="kalp_krizi" name="Kalp_Krizi" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="ic_kanama">İç Kanama:</label>
+<select id="ic_kanama" name="Ic_Kanama" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="kesik">Kesik:</label>
+<select id="kesik" name="Kesik" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="yaralanma">Yaralanma:</label>
+<select id="yaralanma" name="Yaralanma" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="beyin_kanamasi">Beyin Kanaması:</label>
+<select id="beyin_kanamasi" name="Beyin_Kanamasi" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="uzuv_kopmasi">Uzuv Kopması:</label>
+<select id="uzuv_kopmasi" name="Uzuv_Kopmasi" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="sikisma">Sıkışma:</label>
+<select id="sikisma" name="Sikisma" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="omurilik_zedelenmesi">Omurilik Zedelenmesi:</label>
+<select id="omurilik_zedelenmesi" name="Omurilik_Zedelenmesi" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="agri_seviyesi">Ağrı Seviyesi (1-10):</label>
+<input type="number" id="agri_seviyesi" name="Ağrı_Seviyesi" min="1" max="10" required>
+
+<label for="stres_seviyesi">Stres Seviyesi (1-10):</label>
+<input type="number" id="stres_seviyesi" name="Stres_Seviyesi" min="1" max="10" required>
+
+<label for="tedavi_suresi">Tedaviye Ulaşma Süresi (dk):</label>
+<input type="number" id="tedavi_suresi" name="Tedaviye_Ulaşma_Süresi" required>
+<label for="saglik_ekibi_kapasitesi">Sağlık Ekibi Kapasitesi:</label>
+<input type="number" id="saglik_ekibi_kapasitesi" name="Sağlık_Ekibi_Kapasitesi" min="1" max="5" required>
+
+<label for="ates">Ateş (°C):</label>
+<input type="number" id="ates" name="Ateş" step="0.1" required>
+
+<label for="bulanti">Bulantı:</label>
+<select id="bulanti" name="Bulantı" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="kusma">Kusma:</label>
+<select id="kusma" name="Kusma" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="bayilma">Bayılma:</label>
+<select id="bayilma" name="Bayılma" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="bilinc_durumu">Bilinç Durumu:</label>
+<select id="bilinc_durumu" name="Bilinç_Durumu" required>
+    <option value="Normal">Normal</option>
+    <option value="Sersem">Sersem</option>
+    <option value="Bilinçsiz">Bilinçsiz</option>
+</select>
+    
+<label for="epilepsi">Epilepsi:</label>
+<select id="epilepsi" name="Epilepsi" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="koah">KOAH:</label>
+<select id="koah" name="KOAH" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+<label for="bobrek_yetmezligi">Böbrek Yetmezliği:</label>
+<select id="bobrek_yetmezligi" name="Böbrek_Yetmezliği" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="yanik">Yanık:</label>
+<select id="yanik" name="Yanık" required>
+    <option value="1. Derece">1. Derece</option>
+    <option value="2. Derece">2. Derece</option>
+    <option value="3. Derece">3. Derece</option>
+    <option value="Yok">Yok</option>
+</select>
+
+<label for="zehirlenme">Zehirlenme:</label>
+<select id="zehirlenme" name="Zehirlenme" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="bogulma">Boğulma:</label>
+<select id="bogulma" name="Boğulma" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="siddetli_bas_agrisi">Şiddetli Baş Ağrısı (1-10):</label>
+<input type="number" id="siddetli_bas_agrisi" name="Şiddetli_Baş_Ağrısı" min="1" max="10" required>
+
+<label for="laboratuvar_sonuclari">Laboratuvar Sonuçları:</label>
+<input type="number" id="laboratuvar_sonuclari" name="Laboratuvar_Sonuçları" required>
+
+<label for="kan_sekeri">Kan Şekeri:</label>
+<input type="number" id="kan_sekeri" name="Kan_Şekeri" required>
+
+<label for="kalp_hizi_degisenligi">Kalp Hızı Değişkenliği:</label>
+<input type="number" id="kalp_hizi_degisenligi" name="Kalp_Hızı_Değişkenliği" step="0.1" required>
+<label for="nefes_darligi">Nefes Darlığı:</label>
+<select id="nefes_darligi" name="Nefes_Darlığı" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+<label for="hastanin_medikal_gecmisi">Hastanın Medikal Geçmişi:</label>
+<select id="hastanin_medikal_gecmisi" name="Hastanın_Medikal_Geçmişi" required>
+    <option value="Kalp">Kalp Hastalıkları</option>
+    <option value="Böbrek">Böbrek Hastalıkları</option>
+    <option value="Akciğer">Akciğer Hastalıkları</option>
+    <option value="KOAH">KOAH (Kronik Obstrüktif Akciğer Hastalığı)</option>
+    <option value="Kanser">Kanser</option>
+    <option value="Tansiyon">Tansiyon Problemi</option>
+    <option value="Diyabet">Şeker Hastalığı (Diyabet)</option>
+    <option value="Epilepsi">Epilepsi</option>
+    <option value="Karaciğer">Karaciğer Hastalıkları</option>
+    <option value="Sinir_Sistemi">Sinir Sistemi Hastalıkları</option>
+    <option value="Normal">Normal (Kronik Hastalık Yok)</option>
+</select>
+
+<label for="sok_belirtileri">Şok Belirtileri:</label>
+<select id="sok_belirtileri" name="Şok_Belirtileri" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="goz_bebegi_tepkisi">Göz Bebeği Tepkisi:</label>
+<select id="goz_bebegi_tepkisi" name="Göz_Bebeği_Tepkisi" required>
+    <option value="Normal">Normal</option>
+    <option value="Yavaş">Yavaş</option>
+    <option value="Tepkisiz">Tepkisiz</option>
+</select>
+
+<label for="ishal">İshal:</label>
+<select id="ishal" name="İshal" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="agri_konumu">Ağrı Konumu:</label>
+<select id="agri_konumu" name="Ağrı_Konumu" required>
+    <option value="Baş">Baş</option>
+    <option value="Karın">Karın</option>
+    <option value="Göğüs">Göğüs</option>
+    <option value="Sırt">Sırt</option>
+    <option value="Bacak">Bacak</option>
+    <option value="Kol">Kol</option>
+    <option value="Ağrı Yok">Ağrı Yok</option>
+</select>
+
+<label for="gogus_agrisi">Göğüs Ağrısı:</label>
+<select id="gogus_agrisi" name="Göğüs_Ağrısı" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="vucut_sicakligi_degisim">Vücut Sıcaklığı Değişkenliği (°C):</label>
+<input type="number" id="vucut_sicakligi_degisim" name="Vücut_Sıcaklığı_Değişkenliği" step="0.1" required>
+<label for="susuzluk_belirtileri">Susuzluk Belirtileri:</label>
+<select id="susuzluk_belirtileri" name="Susuzluk_Belirtileri" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="son24_saat_yemek">Son 24 Saatte Yemek Yedi:</label>
+<select id="son24_saat_yemek" name="Son_24_Saatte_Yemek_Yedi" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="cilt_kurulugu">Cilt Kuruluğu:</label>
+<select id="cilt_kurulugu" name="Cilt_Kuruluğu" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="norolojik_belirtiler">Nörolojik Belirtiler:</label>
+<select id="norolojik_belirtiler" name="Nörolojik_Belirtiler" required>
+    <option value="Normal">Normal</option>
+    <option value="Konuşma Bozukluğu">Konuşma Bozukluğu</option>
+    <option value="Uyuşukluk">Uyuşukluk</option>
+</select>
+
+<label for="hasta_kac_saat">Hasta Kaç Saat Önce Yaralandı:</label>
+<input type="number" id="hasta_kac_saat" name="Hasta_Kaç_Saat_Önce_Yaralandı" required>
+
+<label for="olay_turu">Olay Türü:</label>
+<select id="olay_turu" name="Olay_Türü" required>
+    <option value="Trafik Kazası">Trafik Kazası</option>
+    <option value="Ev Kazası">Ev Kazası</option>
+    <option value="Spor Yaralanması">Spor Yaralanması</option>
+    <option value="Sanayi Kazası">Sanayi Kazası</option>
+    <option value="Olay Yok">Olay Yok</option>
+</select>
+
+<label for="ilk_mudahale">İlk Müdahale Yapıldı:</label>
+<select id="ilk_mudahale" name="İlk_Müdahale_Yapıldı" required>
+    <option value="Evet">Evet</option>
+    <option value="Hayır">Hayır</option>
+</select>
+
+<label for="onceki_hastane">Hastanın Önceki Hastane Ziyaretleri:</label>
+<input type="number" id="onceki_hastane" name="Hastanın_Önceki_Hastane_Ziyaretleri" required>
+
+<label for="acil_geldigi_saat">Acil Servise Geldiği Saat:</label>
+<input type="number" id="acil_geldigi_saat" name="Acil_Servise_Geldiği_Saat" required>
+
+        <div class="buttons">
+    <button type="button" class="save-btn" onclick="saveFormData()">Kaydet</button>
+    <button type="submit" class="submit-btn" onclick="submitForm(event)">Gönder</button>
+    <button type="button" class="submit-btn" id="tahminBtn">Tahmin Yap</button>
+    <button type="button" class="submit-btn" onclick="downloadReport()">İndir</button>
+    <button type="button" class="list-btn">Listele</button>
+</div>
+</form> <!-- 🔁 Form burada düzgün şekilde kapatıldı -->
+
+<!-- ✅ Tahmin sonucu ve SHAP görseli -->
+<div id="tahminSonuc" style="font-weight: bold; margin-top: 20px;"></div>
+<div id="shapSonuc" style="margin-top: 10px;"></div>
+
+</div> <!-- container -->
+
+<script>
+    // ✅ "Kaydet" Butonu - Form Verilerini Tarayıcıda Sakla
+    function saveFormData() {
+        let formData = new FormData(document.querySelector("form"));
+        let savedData = {};
+
+        formData.forEach((value, key) => {
+            savedData[key] = value;
+        });
+
+        localStorage.setItem("savedFormData", JSON.stringify(savedData));
+        alert("Form verileri kaydedildi!");
+    }
+
+    // ✅ "Gönder" Butonu (Backend Entegrasyonu İçin Hazır)
+    function submitForm(event) {
+        event.preventDefault();  // Sayfanın yenilenmesini engeller
+        alert("Form başarıyla gönderildi!");
+        document.querySelector("form").reset();  // Formu temizler
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const tahminBtn = document.getElementById("tahminBtn");
+        const form = document.getElementById("tahminForm");
+
+        if (!form || !tahminBtn) {
+            console.error("❌ Form veya tahmin butonu bulunamadı!");
+            return;
+        }
+
+        tahminBtn.addEventListener("click", async function () {
+            console.log("✅ Tahmin butonuna tıklandı, işlem başlıyor!");
+
+            const formData = new FormData(form);
+            let jsonData = {};
+
+            formData.forEach((value, key) => {
+                const parsed = parseFloat(value);
+                jsonData[key] = isNaN(parsed) ? value : parsed;
+            });
+
+            console.log("📤 JSON olarak gönderilen veri:", jsonData);
+
+            try {
+                const response = await fetch("/tahmin", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(jsonData)
+                });
+
+                if (!response.ok) {
+                    throw new Error("Sunucu hatası: " + response.status);
+                }
+
+                const result = await response.json();
+                console.log("📥 Tahmin sonucu alındı:", result);
+
+                if (result.tahmin !== undefined) {
+                    document.getElementById("tahminSonuc").textContent = "Tahmin Sonucu: " + result.tahmin;
+                    document.getElementById("shapSonuc").innerHTML = result.shap_html || "SHAP görseli bulunamadı.";
+                } else if (result.hata) {
+                    alert("⚠️ Tahmin hatası: " + result.hata);
+                } else {
+                    alert("⚠️ Beklenmeyen yanıt formatı!");
+                }
+
+            } catch (error) {
+                console.error("❌ Tahmin sırasında hata:", error);
+                alert("❌ Sunucuya bağlanılamadı veya hata oluştu: " + error.message);
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
+

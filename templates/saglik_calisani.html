@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sağlık Çalışanı Paneli</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #b3d9e5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            color: #1e88e5;
+        }
+
+        .date-time {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .welcome-message {
+            background-color: #e3f2fd;
+            color: #1565c0;
+            font-size: 22px;
+            font-weight: bold;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        .welcome-message::before {
+            content: "❤️";
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            font-size: 30px;
+            animation: pulse 1.5s infinite;
+            color: #d32f2f;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: #1e88e5;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            width: 250px;
+            text-align: center;
+            position: relative;
+        }
+
+        .button:hover {
+            background-color: #1565c0;
+        }
+
+        /* Bildirim Badge Stili */
+        .button.notification::after {
+            content: "!";
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background-color: red;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-buttons {
+            margin-top: 30px;
+        }
+
+        .social-buttons a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #1e88e5;
+            font-size: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .social-buttons a:hover {
+            color: #1565c0;
+        }
+    </style>
+    <script>
+        function updateDateTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString();
+            const time = now.toLocaleTimeString();
+            document.getElementById("date-time").innerText = `Tarih: ${date} - Saat: ${time}`;
+        }
+        setInterval(updateDateTime, 1000);
+        window.onload = updateDateTime;
+    </script>
+</head>
+<body>
+   <div class="container">
+    <h1>Sağlık Çalışanı Paneli</h1>
+    <p class="date-time" id="date-time"></p>
+    <div class="welcome-message">
+        Hoş geldiniz, <strong>{{ ad }}</strong>!<br>
+        Siz bizim için çok değerlisiniz. Bugün birlikte hayatları değiştirelim!
+    </div>
+
+    <div class="button-container">
+        <!-- Önemli Butonlar -->
+        <a href="{{ url_for('form_sayfasi') }}" class="button">Hasta Önceliklendirme ve İş Akışı Yönetimi</a>
+        <a href="{{ url_for('hasta_takip') }}" class="button">📊 Hasta Takip ve Veri Yönetimi</a>  <!-- 📌 Yönlendirme Düzeltildi -->
+        <a href="{{ url_for('hasta_ekle') }}" class="button btn-success">➕ Yeni Hasta Ekle</a>
+        <a href="/bildirimler" class="button notification">🔔 Bildirimler</a>
+        <a href="{{ url_for('kayit_tarihi') }}" class="button">📅 Hasta Kayıt Tarihleri</a>       
+        <a href="{{ url_for('saglikci_hatirlaticilar') }}" class="button">⏰ Hatırlatıcılar</a>
+
+        <!-- Ekstra Özellikler -->
+        <a href="{{ url_for('hizli_erisim') }}" class="button">🚀 Hızlı Erişim Sağlayan Özellikler</a>
+        <a href="/verimlilik" class="button">📈 Verimlilik Artırıcı Özellikler</a>
+        <a href="/egitim" class="button">🎓 Eğitim ve Bilgi Paylaşımı</a>
+        <a href="/guvenlik-ve-yasal-uyumluluk" class="button">🔒 Güvenlik ve Yasal Uyumluluk</a>
+        <a href="/sistem-loglari" class="button">📊 Sistem Logları ve Analiz</a>
+
+               <!-- Diğer Butonlar -->
+        <a href="/karsilastirma" class="button">📌 Hastalar Arası Öncelik Kıyaslama</a>
+        <a href="/model-performansi" class="button">🤖 Yapay Zeka Model Performansı</a>
+        <a href="/ayarlar" class="button">⚙️ Kişisel Ayarlar ve Profil Düzenleme</a>
+        <a href="/raporlama" class="button">📑 Rapor Oluştur ve İndir</a>
+        <a href="{{ url_for('cevrimici_mesajlasma') }}" class="button">💬 Mesajlaşma Paneli</a>
+       
+        <a href="/istatistik" class="button">📊 İstatistik ve Raporlama</a>
+        <a href="/form" class="button">📝 Form Paneli</a>
+
+        <!-- Son Eklenenler -->
+        <a href="/hakkimizda" class="button">ℹ️ Hakkımızda</a>
+        <a href="/sosyal-medya" class="button">📲 Sosyal Medya Bağlantıları</a>
+        <a href="{{ url_for('geri_bildirim_saglikci') }}" class="button">📣 Geri Bildirim</a>
+    </div>
+
+    <!-- 📌 Sosyal Medya Bağlantıları -->
+    <div class="social-buttons">
+        <a href="https://facebook.com" target="_blank">Facebook</a>
+        <a href="https://twitter.com" target="_blank">Twitter</a>
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    </div>
+</div>
+</body>
+</html>
+

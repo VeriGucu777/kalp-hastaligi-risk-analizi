@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahmin Sonucu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        table th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tahmin Sonucu</h1>
+    <table>
+        <tr>
+            <th>Özellik</th>
+            <th>Değer</th>
+        </tr>
+        {% for ozellik, deger in veri.items() %}
+        <tr>
+            <td>{{ ozellik }}</td>
+            <td>{{ deger }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h2>Sonuç: {{ tahmin_sonucu }}</h2>
+</body>
+</html>
+
+

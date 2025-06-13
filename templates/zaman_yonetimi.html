@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaman Yönetimi Araçları</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #d0e7ff;
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+        }
+        h1, h2 {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+        .btn-custom {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⏳ Zaman Yönetimi Araçları</h1>
+
+        <nav class="text-center mb-4">
+            <a href="{{ url_for('verimlilik') }}" class="btn btn-secondary btn-custom">🔙 Geri Dön</a>
+        </nav>
+
+        <div class="mb-3">
+            <h2>🕒 Planlayıcı</h2>
+            <p>Günlük ve haftalık işlerinizi buradan planlayabilirsiniz.</p>
+            <a href="{{ url_for('planlayici') }}" class="btn btn-primary btn-custom">📋 Planlayıcıya Git</a>
+        </div>
+
+        <div class="mb-3">
+            <h2>📅 Takvim</h2>
+            <p>Önemli tarihleri ve hatırlatmaları buraya ekleyebilirsiniz.</p>
+            <a href="{{ url_for('takvim') }}" class="btn btn-success btn-custom">📆 Takvime Git</a>
+        </div>
+
+        <div class="mb-3">
+            <h2>⏱ Zamanlayıcı</h2>
+            <p>Belirli görevler için zamanlayıcı kullanabilirsiniz.</p>
+            <a href="{{ url_for('zamanlayici') }}" class="btn btn-warning btn-custom">⏳ Zamanlayıcıya Git</a>
+        </div>
+    </div>
+</body>
+</html>
+

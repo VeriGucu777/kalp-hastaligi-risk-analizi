@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veriler</title>
+</head>
+<body>
+    <h1>Form Verileri</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Yaş</th>
+                <th>Cinsiyet</th>
+                <th>BMI</th>
+                <th>Nabız</th>
+                <th>Tansiyon Sistolik</th>
+                <th>Tansiyon Diastolik</th>
+                <th>Oksijen Doygunluğu</th>
+                <th>Kalp Hastalığı</th>
+                <th>Kanser</th>
+                <th>Kolesterol Sorunu</th>
+                <th>Panik Atak</th>
+                <th>Son Ameliyat</th>
+                <th>Kırık</th>
+                <th>Çıkık</th>
+                <th>Kalp Krizi</th>
+                <th>İç Kanama</th>
+                <th>Kesik</th>
+                <th>Yaralanma</th>
+                <th>Beyin Kanaması</th>
+                <th>Uzuv Kopması</th>
+                <th>Sıkışma</th>
+                <th>Omurilik Zedelenmesi</th>
+                <th>Ağrı Seviyesi</th>
+                <th>Stres Seviyesi</th>
+                <th>Tedavi Süresi</th>
+                <th>Ekip Kapasitesi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for veri in veriler %}
+            <tr>
+                <td>{{ veri.id }}</td>
+                <td>{{ veri.yas }}</td>
+                <td>{{ veri.cinsiyet }}</td>
+                <td>{{ veri.bmi }}</td>
+                <td>{{ veri.nabiz }}</td>
+                <td>{{ veri.tansiyon_sistolik }}</td>
+                <td>{{ veri.tansiyon_diastolik }}</td>
+                <td>{{ veri.oksijen_doygunlugu }}</td>
+                <td>{{ veri.kalp_hastaligi }}</td>
+                <td>{{ veri.kanser }}</td>
+                <td>{{ veri.kolesterol_sorunu }}</td>
+                <td>{{ veri.panik_atak }}</td>
+                <td>{{ veri.son_ameliyat }}</td>
+                <td>{{ veri.kirik }}</td>
+                <td>{{ veri.cikik }}</td>
+                <td>{{ veri.kalp_krizi }}</td>
+                <td>{{ veri.ic_kanama }}</td>
+                <td>{{ veri.kesik }}</td>
+                <td>{{ veri.yaralanma }}</td>
+                <td>{{ veri.beyin_kanamasi }}</td>
+                <td>{{ veri.uzuv_kopmasi }}</td>
+                <td>{{ veri.sikisma }}</td>
+                <td>{{ veri.omurilik_zedelenmesi }}</td>
+                <td>{{ veri.agri_seviyesi }}</td>
+                <td>{{ veri.stres_seviyesi }}</td>
+                <td>{{ veri.tedavi_suresi }}</td>
+                <td>{{ veri.ekip_kapasitesi }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+

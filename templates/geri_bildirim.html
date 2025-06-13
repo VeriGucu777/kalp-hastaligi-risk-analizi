@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geri Bildirim</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1565c0; /* Mavi arka plan */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            color: #002d62;
+        }
+
+        h1 {
+            color: #ff4444; /* Kırmızı başlık */
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #002d62;
+        }
+
+        input, textarea {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #ff4444; /* Kırmızı buton */
+            color: #ffffff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #cc0000;
+            transform: scale(1.05);
+        }
+
+        .feedback-list {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .feedback-item {
+            background: #004080;
+            padding: 15px;
+            border: 1px solid #1565C0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            color: #E3F2FD;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #B3E5FC;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Geri Bildirim</h1> <!-- Sadece "Geri Bildirim" başlığı olarak bırakıldı -->
+        <form action="#" method="post">
+            <label for="name">{{ translate('ad') }}:</label>
+            <input type="text" id="name" name="name" placeholder="{{ translate('ad_placeholder') }}" required>
+
+            <label for="email">{{ translate('email') }}:</label>
+            <input type="email" id="email" name="email" placeholder="{{ translate('email_placeholder') }}" required>
+
+            <label for="feedback">{{ translate('geri_bildirim') }}:</label>
+            <textarea id="feedback" name="feedback" placeholder="{{ translate('geri_bildirim_placeholder') }}" required></textarea>
+
+            <button type="submit">{{ translate('gonder') }}</button>
+        </form>
+        <div class="feedback-list">
+            <h2>{{ translate('gonderilen_geri_bildirimler') }}:</h2>
+            <!-- Örnek geri bildirimler -->
+            <div class="feedback-item">
+                <strong>{{ translate('ad') }}:</strong> Ahmet<br>
+                <strong>{{ translate('email') }}:</strong> ahmet@example.com<br>
+                <strong>{{ translate('geri_bildirim') }}:</strong> {{ translate('feedback_ornek1') }}
+            </div>
+            <div class="feedback-item">
+                <strong>{{ translate('ad') }}:</strong> Elif<br>
+                <strong>{{ translate('email') }}:</strong> elif@example.com<br>
+                <strong>{{ translate('geri_bildirim') }}:</strong> {{ translate('feedback_ornek2') }}
+            </div>
+        </div>
+        <footer>© 2025 {{ translate('saglik_onceligi_sistemi') }}. {{ translate('tum_haklari_saklidir') }}</footer>
+    </div>
+</body>
+</html>
+

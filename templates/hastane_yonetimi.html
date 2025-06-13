@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏥 Hastane Yönetimi Entegrasyonu</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        /* Sayfa genel stili */
+        body {
+            background-color: #b3d9ff; /* Açık mavi arka plan */
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Konteyner */
+        .container {
+            max-width: 700px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-top: 30px;
+        }
+
+        /* Başlık */
+        h1 {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Bölüm Başlıkları */
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Açıklama metni */
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Butonlar */
+        .btn-custom {
+            display: block;
+            width: 100%;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-patient { background-color: #ffcc00; color: #333; }
+        .btn-appointment { background-color: #28a745; color: white; }
+        .btn-reports { background-color: #007bff; color: white; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🏥 Hastane Yönetimi Entegrasyonu</h1>
+
+        <h2>📋 Hasta Bilgi Yönetimi</h2>
+        <p>Hasta kayıtları ve tıbbi verileri entegre edin.</p>
+        <a href="{{ url_for('hasta_bilgi') }}" class="btn btn-custom btn-patient">📋 Hasta Bilgi Sistemine Git</a>
+
+        <h2>💉 Randevu & Tedavi Takibi</h2>
+        <p>Hasta randevularını ve tedavi süreçlerini yönetin.</p>
+        <a href="{{ url_for('randevu_takibi') }}" class="btn btn-custom btn-appointment">📅 Randevu Takibine Git</a>
+
+        <h2>📊 Hastane Raporlama</h2>
+        <p>Verileri analiz ederek detaylı raporlar oluşturun.</p>
+        <a href="{{ url_for('raporlari_goster') }}" class="btn btn-primary">📂 Raporları Göster</a>
+
+        <br>
+        <a href="{{ url_for('verimlilik') }}" class="btn btn-secondary">🔙 Geri Dön</a>
+    </div>
+
+</body>
+</html>
+
