@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veri Girişi Formu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Veri Girişi Formu</h1>
+    <form action="/submit" method="POST">
+        <!-- Temel Bilgiler -->
+        <label for="yas">Yaş:</label>
+        <input type="number" id="yas" name="yas" required>
+
+        <label for="cinsiyet">Cinsiyet:</label>
+        <select id="cinsiyet" name="cinsiyet" required>
+            <option value="Kadın">Kadın</option>
+            <option value="Erkek">Erkek</option>
+        </select>
+
+        <label for="bmi">BMI:</label>
+        <input type="number" id="bmi" name="bmi" step="0.1" required>
+
+        <label for="nabiz">Nabız:</label>
+        <input type="number" id="nabiz" name="nabiz" required>
+
+        <label for="tansiyon_sistolik">Tansiyon Sistolik:</label>
+        <input type="number" id="tansiyon_sistolik" name="tansiyon_sistolik" required>
+
+        <label for="tansiyon_diastolik">Tansiyon Diastolik:</label>
+        <input type="number" id="tansiyon_diastolik" name="tansiyon_diastolik" required>
+
+        <label for="oksijen_doygunlugu">Oksijen Doygunluğu (%):</label>
+        <input type="number" id="oksijen_doygunlugu" name="oksijen_doygunlugu" required>
+
+        <!-- Hastalık ve Yaralanma Bilgileri -->
+        <label for="kalp_hastaligi">Kalp Hastalığı:</label>
+        <select id="kalp_hastaligi" name="kalp_hastaligi" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="kanser">Kanser:</label>
+        <select id="kanser" name="kanser" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="tansiyon_problemi">Tansiyon Problemi:</label>
+        <select id="tansiyon_problemi" name="tansiyon_problemi" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="kolesterol_sorunu">Kolesterol Sorunu:</label>
+        <select id="kolesterol_sorunu" name="kolesterol_sorunu" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="panik_atak">Panik Atak:</label>
+        <select id="panik_atak" name="panik_atak" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="son_ameliyat">Son Ameliyat:</label>
+        <select id="son_ameliyat" name="son_ameliyat" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="kirik">Kırık:</label>
+        <select id="kirik" name="kirik" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="cikik">Çıkık:</label>
+        <select id="cikik" name="cikik" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="kalp_krizi">Kalp Krizi:</label>
+        <select id="kalp_krizi" name="kalp_krizi" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="ic_kanama">İç Kanama:</label>
+        <select id="ic_kanama" name="ic_kanama" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="beyin_kanamasi">Beyin Kanaması:</label>
+        <select id="beyin_kanamasi" name="beyin_kanamasi" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="uzuv_kopmasi">Uzuv Kopması:</label>
+        <select id="uzuv_kopmasi" name="uzuv_kopmasi" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="sikisma">Sıkışma:</label>
+        <select id="sikisma" name="sikisma" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <label for="omurilik_zedelenmesi">Omurilik Zedelenmesi:</label>
+        <select id="omurilik_zedelenmesi" name="omurilik_zedelenmesi" required>
+            <option value="Evet">Evet</option>
+            <option value="Hayır">Hayır</option>
+        </select>
+
+        <!-- Diğer Bilgiler -->
+        <label for="agri_seviyesi">Ağrı Seviyesi (1-10):</label>
+        <input type="number" id="agri_seviyesi" name="agri_seviyesi" min="1" max="10" required>
+
+        <label for="stres_seviyesi">Stres Seviyesi (1-10):</label>
+        <input type="number" id="stres_seviyesi" name="stres_seviyesi" min="1" max="10" required>
+
+        <label for="tedavi_suresi">Tedaviye Ulaşma Süresi (dakika):</label>
+        <input type="number" id="tedavi_suresi" name="tedavi_suresi" required>
+
+        <label for="ekip_kapasitesi">Sağlık Ekibi Kapasitesi (1-5):</label>
+        <input type="number" id="ekip_kapasitesi" name="ekip_kapasitesi" min="1" max="5" required>
+
+        <input type="submit" value="Gönder">
+    </form>
+</body>
+</html>
+
